@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#FFF9F3" />
+    <title>본인·성인 인증 — 탑노트</title>
+    <style>
+      *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#fff9f3;color:#171528;font-family:system-ui,-apple-system,sans-serif}.card{width:min(100%,420px);padding:32px;border:1px solid #ece6e0;border-radius:28px;background:#fff;text-align:center;box-shadow:0 20px 60px rgba(37,30,64,.08)}.mark{width:68px;height:68px;margin:auto;display:grid;place-items:center;border-radius:22px;background:#fff0ea;color:#e95750;font-size:30px}h1{font-size:25px;margin:20px 0 10px}p{color:#6e697d;line-height:1.65;font-size:14px}.error{color:#d9465f}button{width:100%;min-height:56px;margin-top:18px;border:0;border-radius:999px;background:#ff6d63;color:white;font-size:16px;font-weight:800;cursor:pointer}button:disabled{opacity:.45}
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <div class="mark">✓</div>
+      <h1 id="title">본인인증을 준비하고 있어요</h1>
+      <p id="message">휴대전화 명의와 만 19세 이상 여부만 확인하며, 인증 정보는 통화 상대에게 공개되지 않아요.</p>
+      <button id="start" type="button" hidden>다시 시도</button>
+    </main>
+    <script src="./config.js"></script>
+    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+    <script>
+      const title = document.querySelector('#title');
+      const message = document.querySelector('#message');
+      const button = document.querySelector('#start');
+      const config = window.NAEILDO_CONFIG || {};
+      const query = new URLSearchParams(location.search);
+      const appReturn = 'topnote://identity';
+
+      function finish(id, error) {
+        const params = new URLSearchParams();
+        if (id) params.set('identityVerificationId', id);
+        if (error) params.set('error', error);
+        location.replace(`${appReturn}?${params.toString()}`);
+      }
+
+      async function begin() {
+        button.hidden = true;
+        if (!config.portoneStoreId || !config.portoneChannelKey) {
+          title.textContent = '인증 설정이 필요해요';
+          message.textContent = '운영자가 PortOne Store ID와 본인인증 채널 키를 연결해야 해요.';
+          message.className = 'error';
+          return;
+        }
+        const returnedId = query.get('identityVerificationId');
+        const returnedError = query.get('code');
+        if (returnedId || returnedError) return finish(returnedId, returnedError);
+
+        const identityVerificationId = `topnote-${crypto.randomUUID()}`;
+        const redirectUrl = new URL(location.href);
+        redirectUrl.search = '';
+        try {
+          const response = await window.PortOne.requestIdentityVerification({
+            storeId: config.portoneStoreId,
+            channelKey: config.portoneChannelKey,
+            identityVerificationId,
+            redirectUrl: redirectUrl.toString(),
+          });
+          if (response?.code) throw new Error(response.message || response.code);
+          finish(response?.identityVerificationId || identityVerificationId);
+        } catch (error) {
+          title.textContent = '인증을 마치지 못했어요';
+          message.textContent = error instanceof Error ? error.message : '잠시 후 다시 시도해주세요.';
+          message.className = 'error';
+          button.hidden = false;
+        }
+      }
+      button.addEventListener('click', begin);
+      begin();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>베타 소식 수신 철회 — 탑노트</title>
+  <style>
+    body{min-height:100vh;margin:0;display:grid;place-items:center;background:#f5eee6;color:#171528;font-family:system-ui,-apple-system,sans-serif}.card{width:min(440px,calc(100% - 48px));padding:36px;border-radius:24px;background:#fff;box-shadow:0 18px 60px rgba(44,31,35,.1)}.brand{color:#6c302c;font-size:11px;font-weight:900;letter-spacing:2px}h1{margin:14px 0 10px;font-size:28px;line-height:1.3}p{color:#716a73;font-size:14px;line-height:1.7}button{width:100%;min-height:54px;margin-top:20px;border:0;border-radius:16px;background:#171528;color:#fff;font-size:15px;font-weight:900}button:disabled{opacity:.45}.back{display:block;margin-top:18px;color:#6c302c;text-align:center;font-size:13px;font-weight:800;text-decoration:none}#status{min-height:24px;color:#287a65;font-weight:800}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">TOP NOTE · PRIVATE VOICE CLUB</div>
+    <h1>베타 소식 수신을<br>그만 받을까요?</h1>
+    <p>철회하면 대기 신청 이메일과 활동 지역을 즉시 익명화하고 이후 초대·마케팅 소식을 보내지 않습니다. 나중에 다시 신청할 수 있어요.</p>
+    <button id="unsubscribe" type="button">수신 철회하기</button>
+    <p id="status" role="status" aria-live="polite"></p>
+    <a class="back" href="./index.html">탑노트로 돌아가기</a>
+  </main>
+  <script src="./config.js"></script>
+  <script>
+    const button = document.querySelector('#unsubscribe');
+    const status = document.querySelector('#status');
+    const token = new URLSearchParams(location.search).get('token') || '';
+    const valid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(token);
+    if (!valid) { button.disabled = true; status.textContent = '유효한 수신 철회 링크가 아니에요.'; }
+    button.addEventListener('click', async () => {
+      button.disabled = true; button.textContent = '처리 중…'; status.textContent = '';
+      try {
+        const config = window.NAEILDO_CONFIG || {};
+        const response = await fetch(`${config.supabaseUrl}/functions/v1/marketing-unsubscribe`, {
+          method: 'POST',
+          headers: { apikey: config.supabaseAnonKey, Authorization: `Bearer ${config.supabaseAnonKey}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token }),
+        });
+        if (!response.ok) throw new Error('request failed');
+        status.textContent = '수신 철회가 완료됐어요.';
+        button.textContent = '처리 완료';
+      } catch {
+        status.textContent = '처리하지 못했어요. 잠시 뒤 다시 시도해주세요.';
+        button.disabled = false; button.textContent = '다시 시도';
+      }
+    });
+  </script>
+</body>
+</html>
