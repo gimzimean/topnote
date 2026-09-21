@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&family=Song+Myung&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./invite.css" />
   </head>
   <body>
     <nav class="nav wrap">
@@ -25,6 +26,12 @@
     </nav>
 
     <main id="top">
+      <section id="member-invite" class="member-invite" hidden>
+        <div class="wrap member-invite-inner">
+          <div><span>MEMBER INVITATION</span><h2>탑노트 멤버에게 초대받았어요.</h2><p>초대는 자동 승인이 아니라, 가입 심사에 반영되는 신뢰 신호입니다. 신청 후 아래 코드를 앱의 멤버십 화면에 입력해주세요.</p></div>
+          <div class="member-invite-ticket"><small>INVITATION CODE</small><code id="invite-code"></code><button id="copy-invite" type="button">코드 복사</button><a href="#waitlist">FOUNDING 100 신청 →</a></div>
+        </div>
+      </section>
       <section class="hero wrap">
         <div class="hero-copy">
           <span class="page-label">00 / PRIVATE VOICE CLUB</span>

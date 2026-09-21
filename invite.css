@@ -1,0 +1,85 @@
+.member-invite {
+  padding: 28px 0;
+  color: var(--cream);
+  background: var(--night);
+  border-bottom: 1px solid #55484a;
+}
+
+.member-invite-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+
+.member-invite span,
+.member-invite-ticket small {
+  color: #c5947f;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.member-invite h2 {
+  margin: 8px 0 0;
+  font-family: "Song Myung", serif;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.member-invite p {
+  max-width: 670px;
+  margin: 8px 0 0;
+  color: #c8bbb4;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.member-invite-ticket {
+  min-width: 310px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 14px;
+  border: 1px solid #8d7468;
+}
+
+.member-invite-ticket small {
+  grid-column: 1 / -1;
+}
+
+.member-invite-ticket code {
+  align-self: center;
+  color: #fff3e7;
+  font-family: Manrope, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: .09em;
+}
+
+.member-invite-ticket button {
+  padding: 9px 12px;
+  color: var(--night);
+  background: #e5c5af;
+  border: 0;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.member-invite-ticket a {
+  grid-column: 1 / -1;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid #665357;
+  color: #e5c5af;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+@media (max-width: 760px) {
+  .member-invite-inner { grid-template-columns: 1fr; gap: 18px; }
+  .member-invite-ticket { min-width: 0; width: 100%; }
+  .member-invite h2 { font-size: 24px; }
+}

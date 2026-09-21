@@ -2,12 +2,31 @@ const form = document.querySelector('#waitlist-form');
 const status = document.querySelector('#form-status');
 const config = window.NAEILDO_CONFIG || {};
 const params = new URLSearchParams(location.search);
-const campaignSource = params.get('utm_source') || 'direct';
-const campaignName = params.get('utm_campaign') || 'organic-beta';
-const campaignContent = params.get('utm_content') || 'landing';
+const requestedInvite = String(params.get('invite') || '').trim().toLowerCase();
+const invitationCode = /^[0-9a-f]{16}$/.test(requestedInvite) ? requestedInvite : '';
+const campaignSource = params.get('utm_source') || (invitationCode ? 'member-invite' : 'direct');
+const campaignName = params.get('utm_campaign') || (invitationCode ? 'member-referral' : 'organic-beta');
+const campaignContent = params.get('utm_content') || (invitationCode ? 'invitation' : 'landing');
 const isLocalFilePreview = location.protocol === 'file:' && params.get('e2e') !== '1';
 const sessionId = sessionStorage.getItem('topnote-marketing-session') || crypto.randomUUID();
 sessionStorage.setItem('topnote-marketing-session', sessionId);
+
+if (invitationCode) {
+  localStorage.setItem('topnote-member-invite', invitationCode);
+  const invitation = document.querySelector('#member-invite');
+  const code = document.querySelector('#invite-code');
+  const copyButton = document.querySelector('#copy-invite');
+  if (invitation) invitation.hidden = false;
+  if (code) code.textContent = invitationCode;
+  copyButton?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(invitationCode);
+      copyButton.textContent = '복사했어요';
+    } catch {
+      copyButton.textContent = invitationCode;
+    }
+  });
+}
 
 async function trackMarketingEvent(eventName, details = {}) {
   if (isLocalFilePreview || !config.supabaseUrl || !config.supabaseAnonKey) return;
@@ -29,6 +48,7 @@ form?.addEventListener('submit', async (event) => {
   const region = String(data.get('region') || 'unknown');
   const source = ['landing', campaignSource, campaignName, campaignContent, interest]
     .map((value) => String(value).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 40) || 'na')
+    .concat(invitationCode ? [`invite-${invitationCode}`] : [])
     .join(':');
   const button = form.querySelector('button');
   button.disabled = true;
@@ -47,10 +67,12 @@ form?.addEventListener('submit', async (event) => {
       });
       if (!response.ok) throw new Error('request failed');
     } else {
-      localStorage.setItem('topnote-waitlist', JSON.stringify({ email, interest, source, region }));
+      localStorage.setItem('topnote-waitlist', JSON.stringify({ email, interest, source, region, invitationCode }));
     }
     void trackMarketingEvent('waitlist_submitted', { interest, region });
-    status.textContent = '신청됐어요. 첫 번째 초대 소식을 보내드릴게요.';
+    status.textContent = invitationCode
+      ? '신청됐어요. 초대 코드를 보관해두었어요. 앱에서 같은 코드를 입력해주세요.'
+      : '신청됐어요. 첫 번째 초대 소식을 보내드릴게요.';
     form.reset();
   } catch {
     status.textContent = '잠시 연결이 불안정해요. 조금 뒤 다시 시도해주세요.';
