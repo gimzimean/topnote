@@ -16,8 +16,10 @@ if (invitationCode) {
   const invitation = document.querySelector('#member-invite');
   const code = document.querySelector('#invite-code');
   const copyButton = document.querySelector('#copy-invite');
+  const appLink = document.querySelector('#open-in-app');
   if (invitation) invitation.hidden = false;
   if (code) code.textContent = invitationCode;
+  if (appLink) appLink.href = `topnote://membership?invite=${encodeURIComponent(invitationCode)}`;
   copyButton?.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(invitationCode);
