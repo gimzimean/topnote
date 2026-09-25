@@ -3,6 +3,6 @@ window.NAEILDO_CONFIG = {
   supabaseUrl: 'https://rtedhhpfynmrldnaddxl.supabase.co',
   supabaseAnonKey: 'sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc',
   // Public PortOne V2 identifiers. Secrets stay in Supabase Edge Function secrets.
-  portoneStoreId: '',
+  portoneStoreId: 'store-d5d61d93-1595-444f-9ea0-84ec6b46e664',
   portoneChannelKey: '',
 };
