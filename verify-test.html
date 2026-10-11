@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>본인인증 시험 — 탑노트</title>
+    <style>
+      body { margin: 0; font-family: "Noto Sans KR", system-ui, sans-serif; background: #f5eee3; color: #28231e; }
+      main { max-width: 520px; margin: 0 auto; padding: 40px 20px; display: flex; flex-direction: column; gap: 14px; }
+      h1 { margin: 0; font-size: 24px; }
+      p { margin: 0; line-height: 1.7; }
+      button { height: 52px; border: 0; background: #28231e; color: #f5eee3; font-size: 15px; font-weight: 700; cursor: pointer; }
+      pre { white-space: pre-wrap; word-break: break-all; background: #fffdf9; border: 1px solid #ddd3c6; padding: 14px; font-size: 13px; }
+      .error { color: #9e2f3c; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>본인인증 시험 (PortOne 테스트 채널)</h1>
+      <p>운영 확인용 페이지예요. 실제 회원 화면이 아니에요. 같은 브라우저 창에서 탑노트 앱에 로그인한 계정으로 서버 확인까지 진행해요.</p>
+      <p id="who">로그인 계정 확인 중…</p>
+      <button id="start" type="button">KG이니시스 통합인증 시작</button>
+      <pre id="out" hidden></pre>
+    </main>
+    <script src="./config.js"></script>
+    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+    <script>
+      const TEST_CHANNEL_KEY = 'channel-key-cd1dd7e9-10bb-4337-bfa7-8010cb9d566f';
+      const config = window.NAEILDO_CONFIG || {};
+      const out = document.querySelector('#out');
+      const who = document.querySelector('#who');
+      const button = document.querySelector('#start');
+      const show = (value, isError) => { out.hidden = false; out.className = isError ? 'error' : ''; out.textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2); };
+
+      function session() {
+        for (let i = 0; i < localStorage.length; i += 1) {
+          const key = localStorage.key(i);
+          if (!/^sb-.*-auth-token$/.test(key)) continue;
+          try { const value = JSON.parse(localStorage.getItem(key)); if (value?.access_token) return value; } catch {}
+        }
+        return null;
+      }
+
+      async function confirmOnServer(identityVerificationId) {
+        const current = session();
+        if (!current) { show('이 창에서 탑노트 앱(…/topnote/app/)에 먼저 로그인해 주세요.', true); return; }
+        show(`인증 번호 ${identityVerificationId}\n서버에서 확인 중…`);
+        const response = await fetch(`${config.supabaseUrl}/functions/v1/identity-verify`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', apikey: config.supabaseAnonKey, authorization: `Bearer ${current.access_token}` },
+          body: JSON.stringify({ identityVerificationId }),
+        });
+        const body = await response.json().catch(() => ({}));
+        show({ identityVerificationId, httpStatus: response.status, server: body }, !response.ok);
+      }
+
+      async function begin() {
+        const identityVerificationId = `topnote-test-${crypto.randomUUID()}`;
+        const redirectUrl = new URL(location.href); redirectUrl.search = '';
+        try {
+          const response = await window.PortOne.requestIdentityVerification({
+            storeId: config.portoneStoreId,
+            channelKey: TEST_CHANNEL_KEY,
+            identityVerificationId,
+            redirectUrl: redirectUrl.toString(),
+          });
+          if (response?.code) throw new Error(response.message || response.code);
+          await confirmOnServer(response?.identityVerificationId || identityVerificationId);
+        } catch (error) {
+          show(error instanceof Error ? error.message : String(error), true);
+        }
+      }
+
+      const current = session();
+      who.textContent = current?.user?.phone ? `로그인 계정: ${String(current.user.phone).replace(/^82/, '0')}` : '로그인 계정 없음 — 이 창에서 앱에 먼저 로그인해 주세요.';
+      const query = new URLSearchParams(location.search);
+      if (query.get('identityVerificationId')) confirmOnServer(query.get('identityVerificationId'));
+      else if (query.get('code')) show(`인증 실패: ${query.get('code')} ${query.get('message') || ''}`, true);
+      button.addEventListener('click', begin);
+    </script>
+  </body>
+</html>
