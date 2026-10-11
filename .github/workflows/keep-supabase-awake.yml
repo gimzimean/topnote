@@ -14,6 +14,7 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    steps:
       - name: Run a read-only database function through the public REST API
         run: |
           key=$(curl -fsS https://gimzimean.github.io/topnote/config.js | grep -o "sb_publishable_[A-Za-z0-9_-]*")
