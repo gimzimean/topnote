@@ -14,12 +14,11 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    steps:
-      - name: Query the database through the public REST API
+      - name: Run a read-only database function through the public REST API
         run: |
           key=$(curl -fsS https://gimzimean.github.io/topnote/config.js | grep -o "sb_publishable_[A-Za-z0-9_-]*")
-          code=$(curl -s -o /dev/null -w "%{http_code}" \
-            -H "apikey: $key" -H "Authorization: Bearer $key" \
-            "https://rtedhhpfynmrldnaddxl.supabase.co/rest/v1/app_flags?select=key&limit=1")
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            -H "apikey: $key" -H "Content-Type: application/json" -d '{"p_text":"ping"}' \
+            "https://rtedhhpfynmrldnaddxl.supabase.co/rest/v1/rpc/profile_text_violation")
           echo "REST status $code"
-          test "$code" -lt 500
+          test "$code" = 200
