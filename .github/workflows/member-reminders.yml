@@ -1,0 +1,26 @@
+name: member-reminders
+
+# 하루 한 번(오전 10시 KST): 3개월 지난 인증 갱신 알림을 쌓고 밀린 회원 푸시를 보낸다.
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Queue refresh reminders and send member pushes
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          key=$(curl -fsS https://gimzimean.github.io/topnote/config.js | grep -o "sb_publishable_[A-Za-z0-9_-]*")
+          out=$(curl -s -w "\n%{http_code}" -X POST \
+            -H "apikey: $key" -H "Authorization: Bearer $key" -H "x-cron-secret: $CRON_SECRET" -H "Content-Type: application/json" -d '{}' \
+            "https://rtedhhpfynmrldnaddxl.supabase.co/functions/v1/send-member-notifications")
+          echo "$out"
+          test "$(echo "$out" | tail -1)" = 200
