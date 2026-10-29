@@ -83,3 +83,13 @@ form?.addEventListener('submit', async (event) => {
     button.textContent = '베타 신청';
   }
 });
+
+// 광고 채널(utm)을 웹앱 링크로 넘긴다(2026-10-29): 앱이 회원별 유입 채널로 남긴다.
+document.addEventListener('click', (event) => {
+  const link = event.target instanceof Element ? event.target.closest('a[href]') : null;
+  if (!link || !params.get('utm_source')) return;
+  const url = new URL(link.getAttribute('href'), location.href);
+  if (!url.pathname.includes('/app')) return;
+  for (const key of ['utm_source', 'utm_campaign', 'utm_content']) if (params.get(key) && !url.searchParams.get(key)) url.searchParams.set(key, params.get(key));
+  link.setAttribute('href', url.toString());
+}, true);
