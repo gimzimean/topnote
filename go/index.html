@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>탑노트 설치</title>
+<script>
+// 광고 링크 하나로 폰에 맞는 스토어로 보낸다 (2026-10-29). ?c=캠페인 이름 (기본 topnote_tt_1027)
+(function(){
+  var c=(new URLSearchParams(location.search).get('c')||'topnote_tt_1027').replace(/[^\w-]/g,'');
+  var ua=navigator.userAgent||'';
+  var ios=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);
+  var src=(new URLSearchParams(location.search).get('s')||'tiktok').replace(/[^\w-]/g,'');
+  var apple='https://apps.apple.com/kr/app/id6813747102?ct='+c;
+  var play='https://play.google.com/store/apps/details?id=com.topnote.app&referrer='+encodeURIComponent('utm_source='+src+'&utm_medium=paid&utm_campaign='+c);
+  window.__to=ios?apple:play;
+  location.replace(window.__to);
+})();
+</script>
+<style>body{font-family:-apple-system,sans-serif;text-align:center;padding:60px 20px;color:#1b1414;background:#F3EBDD}a{display:block;margin:14px auto;max-width:260px;padding:14px;border-radius:12px;background:#1b1414;color:#fff;text-decoration:none}</style>
+</head><body>
+<p>스토어로 이동하고 있어요…</p>
+<a href="https://apps.apple.com/kr/app/id6813747102?ct=topnote_tt_1027">App Store에서 받기</a>
+<a href="https://play.google.com/store/apps/details?id=com.topnote.app">Google Play에서 받기</a>
+</body></html>
