@@ -4,21 +4,41 @@
 <meta name="robots" content="noindex">
 <title>탑노트 설치</title>
 <script>
-// 광고 링크 하나로 폰에 맞는 스토어로 보낸다 (2026-10-29). ?c=캠페인 이름 (기본 topnote_tt_1027)
+// 광고·초대 링크 하나로 폰에 맞는 스토어로 보낸다 (2026-10-29).
+//   ?c=캠페인(기본 topnote_tt_1027) ?s=소스(기본 tiktok)
+//   ?talk=4인 수다 친구 코드 · ?invite=멤버 초대 코드 → 안드로이드는 플레이 referrer 에 실어 보낸다
+//   (앱이 첫 실행 때 설치 referrer 를 읽는다). 아이폰은 referrer 가 없어 코드를 복사한 뒤 앱스토어로 간다.
 (function(){
-  var c=(new URLSearchParams(location.search).get('c')||'topnote_tt_1027').replace(/[^\w-]/g,'');
+  var q=new URLSearchParams(location.search), clean=function(v,re){return (v||'').replace(re,'')};
+  var c=clean(q.get('c')||'topnote_tt_1027',/[^\w-]/g), src=clean(q.get('s')||'tiktok',/[^\w-]/g);
+  var talk=clean(q.get('talk')||q.get('talkCode'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,12);
+  var invite=clean(q.get('invite'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,16);
+  if(talk||invite){ if(src==='tiktok') src='invite'; if(c==='topnote_tt_1027') c=talk?'talk_invite':'member_invite'; }
   var ua=navigator.userAgent||'';
   var ios=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);
-  var src=(new URLSearchParams(location.search).get('s')||'tiktok').replace(/[^\w-]/g,'');
+  var ref='utm_source='+src+'&utm_medium='+(talk||invite?'referral':'paid')+'&utm_campaign='+c+(talk?'&talkCode='+talk:'')+(invite?'&invite='+invite:'');
   var apple='https://apps.apple.com/kr/app/id6813747102?ct='+c;
-  var play='https://play.google.com/store/apps/details?id=com.topnote.app&referrer='+encodeURIComponent('utm_source='+src+'&utm_medium=paid&utm_campaign='+c);
-  window.__to=ios?apple:play;
-  location.replace(window.__to);
+  var play='https://play.google.com/store/apps/details?id=com.topnote.app&referrer='+encodeURIComponent(ref);
+  window.__go={ios:ios,apple:apple,play:play,code:talk||invite,kind:talk?'talk':(invite?'invite':'')};
+  if(!ios||!window.__go.code){ location.replace(ios?apple:play); }
 })();
 </script>
-<style>body{font-family:-apple-system,sans-serif;text-align:center;padding:60px 20px;color:#1b1414;background:#F3EBDD}a{display:block;margin:14px auto;max-width:260px;padding:14px;border-radius:12px;background:#1b1414;color:#fff;text-decoration:none}</style>
+<style>body{font-family:-apple-system,"Apple SD Gothic Neo",sans-serif;text-align:center;padding:56px 20px;color:#1b1414;background:#F3EBDD;margin:0}h1{font-size:22px;margin:0 0 8px}p{color:#5a4a44;margin:6px 0 22px;line-height:1.5}code{display:block;font-size:30px;letter-spacing:4px;font-weight:800;margin:10px auto 18px}a,button{display:block;width:100%;max-width:300px;margin:12px auto;padding:15px;border-radius:12px;border:0;background:#1b1414;color:#fff;font-size:16px;font-weight:700;text-decoration:none;cursor:pointer}a.sub{background:transparent;color:#1b1414;border:1px solid #1b1414}</style>
 </head><body>
-<p>스토어로 이동하고 있어요…</p>
+<div id="wait"><p>스토어로 이동하고 있어요…</p>
 <a href="https://apps.apple.com/kr/app/id6813747102?ct=topnote_tt_1027">App Store에서 받기</a>
-<a href="https://play.google.com/store/apps/details?id=com.topnote.app">Google Play에서 받기</a>
+<a class="sub" href="https://play.google.com/store/apps/details?id=com.topnote.app">Google Play에서 받기</a></div>
+<div id="code" hidden><h1 id="ttl">친구가 탑노트로 불렀어요</h1><p id="msg">아래 버튼을 누르면 코드가 복사되고 앱스토어로 가요.<br>앱을 열면 코드가 바로 들어가요.</p><code id="cv"></code><button id="btn" type="button">코드 복사하고 앱 받기</button></div>
+<script>
+(function(){var g=window.__go; if(!(g&&g.ios&&g.code))return;
+  document.getElementById('wait').hidden=true; document.getElementById('code').hidden=false;
+  document.getElementById('cv').textContent=g.code;
+  if(g.kind==='invite'){document.getElementById('ttl').textContent='탑노트 초대장이 왔어요';}
+  var text=(g.kind==='talk'?'topnote-talk:':'topnote-invite:')+g.code;
+  document.getElementById('btn').onclick=function(){
+    var go=function(){location.href=g.apple};
+    try{navigator.clipboard.writeText(text).then(go,go);}catch(e){go();}
+  };
+})();
+</script>
 </body></html>
