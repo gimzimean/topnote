@@ -37,12 +37,19 @@
   // PC(안드로이드·아이폰이 아닌 것)는 넘기지 않고 두 스토어 단추를 보여준다(2026-10-30 대표 「PC에서 안드로이드로만 가」).
   var mobile=ios||/Android/i.test(ua);
   window.__go.pc=!mobile;
-  if(!window.__go.code&&mobile){ setTimeout(function(){location.replace(ios?apple:window.__go.android);},150); }
+  // 단계 기록(운영실 진단용): 자동 이동 뒤에도 이 화면에 남아 있으면 stuck, 버튼을 누르면 tap (path /go-step/).
+  window.__go.step=function(k){try{fetch('https://rtedhhpfynmrldnaddxl.supabase.co/rest/v1/marketing_events',{method:'POST',keepalive:true,headers:{'apikey':'sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc','Authorization':'Bearer sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc','Content-Type':'application/json','Prefer':'return=minimal'},
+    body:JSON.stringify({event_name:'page_view',session_id:sid,utm_source:src,utm_campaign:c,utm_content:k+'_'+(ios?'ios':'android')+(inapp?'_inapp':''),path:'/go-step/'})}).catch(function(){});}catch(e){}};
+  if(!window.__go.code&&mobile){
+    setTimeout(function(){location.replace(ios?apple:window.__go.android);},150);
+    // 틱톡·인스타 앱 안 브라우저가 market:// 를 막으면 화면이 그대로 남는다(2026-10-30) → 2초 뒤에도 보이면 기록.
+    setTimeout(function(){ if(document.visibilityState==='visible') window.__go.step('stuck'); },2000);
+  }
 })();
 </script>
 <style>body{font-family:-apple-system,"Apple SD Gothic Neo",sans-serif;text-align:center;padding:56px 20px;color:#1b1414;background:#F3EBDD;margin:0}h1{font-size:22px;margin:0 0 8px}p{color:#5a4a44;margin:6px 0 22px;line-height:1.5}code{display:block;font-size:30px;letter-spacing:4px;font-weight:800;margin:10px auto 18px}a,button{display:block;width:100%;max-width:300px;margin:12px auto;padding:15px;border-radius:12px;border:0;background:#1b1414;color:#fff;font-size:16px;font-weight:700;text-decoration:none;cursor:pointer}a.sub{background:transparent;color:#1b1414;border:1px solid #1b1414}</style>
 </head><body>
-<div id="wait"><p id="waitMsg">스토어로 이동하고 있어요…</p>
+<div id="wait"><p id="waitMsg">안 넘어가면 아래 버튼을 눌러 주세요.</p>
 <a id="aPlay" href="https://play.google.com/store/apps/details?id=com.topnote.app">Google Play에서 설치</a>
 <a id="aApple" class="sub" href="https://apps.apple.com/kr/app/id6813747102?ct=topnote_tt_1027">App Store에서 받기</a></div>
 <!-- 설명 없이 제목과 단추만(2026-10-30 대표 「초대코드 설명이 너무 길다, 문구는 적지 말고」): 앱이 코드를 저절로 읽어 같은 방에 앉힌다. -->
@@ -51,7 +58,9 @@
 // 저절로 안 넘어가면 누를 단추: 폰에 맞는 스토어를 위로, 안드로이드는 플레이 앱으로(설치 referrer 그대로).
 (function(){var g=window.__go; if(!g)return; var a=document.getElementById('aPlay'), b=document.getElementById('aApple');
   if(g.pc){ a.href=g.play; b.href=g.apple; b.className=''; var w=document.querySelector('#wait p'); if(w) w.innerHTML='탑노트는 폰 앱이에요.<br>쓰시는 폰의 스토어를 고르세요.'; return; }
-  if(g.ios){ a.parentNode.insertBefore(b,a); b.className=''; a.className='sub'; } else { a.href=g.android; b.href=g.apple; }
+  if(g.ios){ a.parentNode.insertBefore(b,a); b.className=''; a.className='sub'; } else { a.href=g.play; b.href=g.apple; }
+  // 버튼은 market:// 대신 https 플레이 주소: 앱 안 브라우저가 market:// 를 막아 버튼까지 안 눌리던 문제(2026-10-30). 안드로이드는 이 주소를 플레이 앱으로 연다.
+  a.addEventListener('click',function(){g.step&&g.step('tap')}); b.addEventListener('click',function(){g.step&&g.step('tap')});
 })();
 </script>
 <script>
