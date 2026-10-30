@@ -42,7 +42,7 @@
 </script>
 <style>body{font-family:-apple-system,"Apple SD Gothic Neo",sans-serif;text-align:center;padding:56px 20px;color:#1b1414;background:#F3EBDD;margin:0}h1{font-size:22px;margin:0 0 8px}p{color:#5a4a44;margin:6px 0 22px;line-height:1.5}code{display:block;font-size:30px;letter-spacing:4px;font-weight:800;margin:10px auto 18px}a,button{display:block;width:100%;max-width:300px;margin:12px auto;padding:15px;border-radius:12px;border:0;background:#1b1414;color:#fff;font-size:16px;font-weight:700;text-decoration:none;cursor:pointer}a.sub{background:transparent;color:#1b1414;border:1px solid #1b1414}</style>
 </head><body>
-<div id="wait"><p>스토어로 이동하고 있어요…</p>
+<div id="wait"><p id="waitMsg">스토어로 이동하고 있어요…</p>
 <a id="aPlay" href="https://play.google.com/store/apps/details?id=com.topnote.app">Google Play에서 설치</a>
 <a id="aApple" class="sub" href="https://apps.apple.com/kr/app/id6813747102?ct=topnote_tt_1027">App Store에서 받기</a></div>
 <div id="code" hidden><h1 id="ttl">친구가 탑노트로 불렀어요</h1><p id="msg">버튼을 누르면 코드가 복사되고 스토어로 가요.<br>앱에서 「친구 코드 넣기」에 붙여 넣으면 같은 방이에요.</p><code id="cv"></code><button id="btn" type="button">코드 복사하고 앱 받기</button></div>
@@ -50,6 +50,7 @@
 // 저절로 안 넘어가면 누를 단추: 폰에 맞는 스토어를 위로, 안드로이드는 플레이 앱으로(설치 referrer 그대로).
 (function(){var g=window.__go; if(!g)return; var a=document.getElementById('aPlay'), b=document.getElementById('aApple');
   if(g.pc){ a.href=g.play; b.href=g.apple; b.className=''; var w=document.querySelector('#wait p'); if(w) w.innerHTML='탑노트는 폰 앱이에요.<br>쓰시는 폰의 스토어를 고르세요.'; return; }
+  if(g.desktop) document.getElementById('waitMsg').textContent='휴대폰에 맞는 스토어를 골라 주세요.';
   if(g.ios){ a.parentNode.insertBefore(b,a); b.className=''; a.className='sub'; } else { a.href=g.android; b.href=g.apple; }
 })();
 </script>
