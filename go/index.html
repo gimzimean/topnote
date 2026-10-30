@@ -5,15 +5,15 @@
 <title>탑노트 설치</title>
 <script>
 // 광고·초대 링크 하나로 폰에 맞는 스토어로 보낸다 (2026-10-29).
-//   ?c=캠페인(기본 topnote_tt_1027) ?s=소스(기본 tiktok)
+//   ?c=캠페인(기본 none) ?src·?s=소스(기본 direct — 2026-10-30: 주소만 복사해 온 사람이 틱톡으로 잡히던 것 수정)
 //   ?talk=4인 수다 친구 코드 · ?invite=멤버 초대 코드 → 안드로이드는 플레이 referrer 에 실어 보낸다
 //   (앱이 첫 실행 때 설치 referrer 를 읽는다). 아이폰은 referrer 가 없어 코드를 복사한 뒤 앱스토어로 간다.
 (function(){
   var q=new URLSearchParams(location.search), clean=function(v,re){return (v||'').replace(re,'')};
-  var c=clean(q.get('c')||'topnote_tt_1027',/[^\w-]/g), src=clean(q.get('src')||q.get('s')||'tiktok',/[^\w-]/g);
+  var c=clean(q.get('c')||'none',/[^\w-]/g), src=clean(q.get('src')||q.get('s')||'direct',/[^\w-]/g);
   var talk=clean(q.get('talk')||q.get('talkCode'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,12);
   var invite=clean(q.get('invite'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,16);
-  if(talk||invite){ if(src==='tiktok') src='invite'; if(c==='topnote_tt_1027') c=talk?'talk_invite':'member_invite'; }
+  if(talk||invite){ if(src==='direct') src='invite'; if(c==='none') c=talk?'talk_invite':'member_invite'; }
   var ua=navigator.userAgent||'';
   var ios=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);
   // PC(안드로이드·아이폰이 아닌 기기)는 플레이 앱 주소(intent://)를 못 열어 멈췄다 → 웹 플레이 페이지로 바로 보낸다(2026-10-30).
