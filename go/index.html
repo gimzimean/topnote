@@ -11,9 +11,23 @@
 (function(){
   var q=new URLSearchParams(location.search), clean=function(v,re){return (v||'').replace(re,'')};
   var c=clean(q.get('c')||'none',/[^\w-]/g), src=clean(q.get('src')||q.get('s')||'direct',/[^\w-]/g);
+  // src 가 없으면 열린 앱(앱 안 브라우저 표시)과 직전 사이트로 출처를 찾는다(2026-10-30 대표 「src 없어도 유입 무조건 찾아내줘」).
+  if(!q.get('src')&&!q.get('s')){
+    var u0=navigator.userAgent||'', rf=''; try{rf=document.referrer?new URL(document.referrer).hostname:''}catch(e){}
+    src=/Barcelona/i.test(u0)||/threads\.(net|com)/.test(rf)?'threads'
+      :/Instagram/i.test(u0)||/instagram\.com/.test(rf)?'instagram'
+      :/musical_ly|BytedanceWebview|trill|TikTok/i.test(u0)||/tiktok\.com/.test(rf)?'tiktok'
+      :/FBAN|FBAV|FB_IAB/i.test(u0)||/facebook\.com/.test(rf)?'facebook'
+      :/KAKAOTALK/i.test(u0)||/kakao/.test(rf)?'kakaotalk'
+      :/NAVER/i.test(u0)||/naver\.com/.test(rf)?'naver'
+      :/Line\//.test(u0)?'line'
+      :/google\./.test(rf)?'google'
+      :rf&&!/gimzimean\.github\.io/.test(rf)?rf.replace(/^www\./,'').replace(/[^\w-]/g,'_').slice(0,40)
+      :'direct';
+  }
   var talk=clean(q.get('talk')||q.get('talkCode'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,12);
   var invite=clean(q.get('invite'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,16);
-  if(talk||invite){ if(src==='direct') src='invite'; if(c==='none') c=talk?'talk_invite':'member_invite'; }
+  if(talk||invite){ if(!q.get('src')&&!q.get('s')) src='invite'; if(c==='none') c=talk?'talk_invite':'member_invite'; }
   var ua=navigator.userAgent||'';
   var ios=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);
   // PC(안드로이드·아이폰이 아닌 기기)는 플레이 앱 주소(intent://)를 못 열어 멈췄다 → 웹 플레이 페이지로 바로 보낸다(2026-10-30).
