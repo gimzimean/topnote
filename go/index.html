@@ -30,7 +30,7 @@
       :/NAVER/i.test(u0)||/naver\.com/.test(rf)?'naver'
       :/Line\//.test(u0)?'line'
       :/google\./.test(rf)?'google'
-      :rf&&!/gimzimean\.github\.io/.test(rf)?rf.replace(/^www\./,'').replace(/[^\w-]/g,'_').slice(0,40)
+      :rf&&!/gimzimean\.github\.io|topnote\.app/.test(rf)?rf.replace(/^www\./,'').replace(/[^\w-]/g,'_').slice(0,40)
       :'direct';
   }
   var talk=clean(q.get('talk')||q.get('talkCode'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,12);
