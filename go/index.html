@@ -50,7 +50,6 @@
 // 저절로 안 넘어가면 누를 단추: 폰에 맞는 스토어를 위로, 안드로이드는 플레이 앱으로(설치 referrer 그대로).
 (function(){var g=window.__go; if(!g)return; var a=document.getElementById('aPlay'), b=document.getElementById('aApple');
   if(g.pc){ a.href=g.play; b.href=g.apple; b.className=''; var w=document.querySelector('#wait p'); if(w) w.innerHTML='탑노트는 폰 앱이에요.<br>쓰시는 폰의 스토어를 고르세요.'; return; }
-  if(g.desktop) document.getElementById('waitMsg').textContent='휴대폰에 맞는 스토어를 골라 주세요.';
   if(g.ios){ a.parentNode.insertBefore(b,a); b.className=''; a.className='sub'; } else { a.href=g.android; b.href=g.apple; }
 })();
 </script>
