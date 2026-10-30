@@ -10,12 +10,14 @@
 //   (앱이 첫 실행 때 설치 referrer 를 읽는다). 아이폰은 referrer 가 없어 코드를 복사한 뒤 앱스토어로 간다.
 (function(){
   var q=new URLSearchParams(location.search), clean=function(v,re){return (v||'').replace(re,'')};
-  var c=clean(q.get('c')||'topnote_tt_1027',/[^\w-]/g), src=clean(q.get('s')||'tiktok',/[^\w-]/g);
+  var c=clean(q.get('c')||'topnote_tt_1027',/[^\w-]/g), src=clean(q.get('src')||q.get('s')||'tiktok',/[^\w-]/g);
   var talk=clean(q.get('talk')||q.get('talkCode'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,12);
   var invite=clean(q.get('invite'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,16);
   if(talk||invite){ if(src==='tiktok') src='invite'; if(c==='topnote_tt_1027') c=talk?'talk_invite':'member_invite'; }
   var ua=navigator.userAgent||'';
   var ios=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);
+  // PC(안드로이드·아이폰이 아닌 기기)는 플레이 앱 주소(intent://)를 못 열어 멈췄다 → 웹 플레이 페이지로 바로 보낸다(2026-10-30).
+  var android=/Android/i.test(ua);
   var ref='utm_source='+src+'&utm_medium='+(talk||invite?'referral':'paid')+'&utm_campaign='+c+(talk?'&talkCode='+talk:'')+(invite?'&invite='+invite:'');
   var apple='https://apps.apple.com/kr/app/id6813747102?ct='+c;
   var play='https://play.google.com/store/apps/details?id=com.topnote.app&referrer='+encodeURIComponent(ref);
@@ -31,7 +33,7 @@
   var inapp=/musical_ly|BytedanceWebview|trill|TikTok|FBAN|FBAV|Instagram|KAKAOTALK|NAVER|; wv\)/i.test(ua);
   var market='market://details?'+pq;
   var intent='intent://details?'+pq+'#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url='+encodeURIComponent(play)+';end';
-  window.__go.android=inapp?market:intent;
+  window.__go.android=android?(inapp?market:intent):play;
   if(!window.__go.code){ setTimeout(function(){location.replace(ios?apple:window.__go.android);},150); }
 })();
 </script>
