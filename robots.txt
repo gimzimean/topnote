@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /app/
+Disallow: /admin/
+Disallow: /go/
+Disallow: /verify-test.html
+Disallow: /unsubscribe.html
 
-Sitemap: https://gimzimean.github.io/topnote/sitemap.xml
+Sitemap: https://topnote.app/sitemap.xml

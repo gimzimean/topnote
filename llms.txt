@@ -1,0 +1,25 @@
+# 탑노트 (TOP NOTE)
+
+> 만나기 전에 목소리로 3분 먼저 이야기해 보는 한국 소개 앱. 1:1 3분 음성 통화와, 처음 만난 넷이 10분 이야기하는 「4인 수다」가 있다. 운영사: 몬타나 주식회사(Montana CO.,Ltd).
+
+## 핵심 사실
+- 1:1 통화: 사진 없이 3분. 둘 다 「조금 더」를 누르면 3분 연장.
+- 사진·인증: 통화 뒤 둘 다 원할 때만 동시에 공개. 한쪽 선택은 알리지 않음.
+- 전화번호: 사진을 본 뒤 둘 다 다시 원할 때만 교환. 앱 안 채팅방은 없음.
+- 4인 수다: 처음 만난 넷이 10분 음성 대화. 끝나고 서로 지목하면 1:1 3분 통화.
+- 가입: 간편인증으로 본인·만 19세 이상 확인. 직장·소득 등 인증은 선택이며 통화 뒤에만 보임.
+- 지인 피하기: 내 연락처 속 사람, 같은 회사 사람과는 연결하지 않음.
+- 통화 시간: 매일 저녁 5시~밤 11시 예약.
+- 요금: 앱 무료, 하루 한 명 무료 소개, 그 이상은 앱 안 통화권(애플·구글 결제).
+- 통화는 녹음하지 않으며, 언제든 종료·신고·차단 가능.
+- 지역: 한국. 앱: iOS, Android.
+
+## 링크
+- 홈: https://topnote.app/
+- 보이스 소개팅 안내: https://topnote.app/guide/voice-dating.html
+- 직장인 소개팅 앱 고르는 법: https://topnote.app/guide/office-dating-app.html
+- 4인 수다 안내: https://topnote.app/guide/group-talk.html
+- 자주 묻는 질문: https://topnote.app/faq.html
+- App Store: https://apps.apple.com/kr/app/id6813747102
+- Google Play: https://play.google.com/store/apps/details?id=com.topnote.app
+- 고객지원: support@zzend.app

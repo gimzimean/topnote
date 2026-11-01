@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://gimzimean.github.io/topnote/</loc></url>
-  <url><loc>https://gimzimean.github.io/topnote/support.html</loc></url>
-  <url><loc>https://gimzimean.github.io/topnote/privacy.html</loc></url>
-  <url><loc>https://gimzimean.github.io/topnote/terms.html</loc></url>
-  <url><loc>https://gimzimean.github.io/topnote/delete-account.html</loc></url>
+  <url><loc>https://topnote.app/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://topnote.app/guide/voice-dating.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://topnote.app/guide/office-dating-app.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://topnote.app/guide/group-talk.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://topnote.app/faq.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://topnote.app/support.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://topnote.app/community-guidelines.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://topnote.app/privacy.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://topnote.app/terms.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://topnote.app/delete-account.html</loc><lastmod>2026-11-01</lastmod></url>
 </urlset>
