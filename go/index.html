@@ -37,9 +37,11 @@
   var invite=clean(q.get('invite'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,16);
   if(talk||invite){ if(!q.get('src')&&!q.get('s')) src='invite'; if(c==='none') c=talk?'talk_invite':'member_invite'; }
   var ua=navigator.userAgent||'';
-  var ios=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);
+  // 아이폰 판별: 페이스북 앱 안 브라우저가 기기 정보에 iPhone 을 안 넣어 안드로이드로 보낸 일(2026-11-01) → 기종 값(platform)도 본다.
+  var plat=navigator.platform||'';
+  var ios=/iPhone|iPad|iPod/i.test(plat)||/iPhone|iPad|iPod|FBIOS|FBSN/iOS/i.test(ua)||((/Macintosh/.test(ua)||/MacIntel/.test(plat))&&navigator.maxTouchPoints>1);
   // PC(안드로이드·아이폰이 아닌 기기)는 플레이 앱 주소(intent://)를 못 열어 멈췄다 → 웹 플레이 페이지로 바로 보낸다(2026-10-30).
-  var android=/Android/i.test(ua);
+  var android=!ios&&/Android/i.test(ua);
   var ref='utm_source='+src+'&utm_medium='+(talk||invite?'referral':'paid')+'&utm_campaign='+c+(talk?'&talkCode='+talk:'')+(invite?'&invite='+invite:'');
   var apple='https://apps.apple.com/kr/app/id6813747102?ct='+c;
   var play='https://play.google.com/store/apps/details?id=com.topnote.app&referrer='+encodeURIComponent(ref);
@@ -57,11 +59,11 @@
   var intent='intent://details?'+pq+'#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url='+encodeURIComponent(play)+';end';
   window.__go.android=android?(inapp?market:intent):play;
   // PC(안드로이드·아이폰이 아닌 것)는 넘기지 않고 두 스토어 단추를 보여준다(2026-10-30 대표 「PC에서 안드로이드로만 가」).
-  var mobile=ios||/Android/i.test(ua);
+  var mobile=ios||android;
   window.__go.pc=!mobile;
   // 단계 기록(운영실 진단용): 자동 이동 뒤에도 이 화면에 남아 있으면 stuck, 버튼을 누르면 tap (path /go-step/).
   window.__go.step=function(k){try{fetch('https://rtedhhpfynmrldnaddxl.supabase.co/rest/v1/marketing_events',{method:'POST',keepalive:true,headers:{'apikey':'sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc','Authorization':'Bearer sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc','Content-Type':'application/json','Prefer':'return=minimal'},
-    body:JSON.stringify({event_name:'page_view',session_id:sid,utm_source:src,utm_campaign:c,utm_content:k+'_'+(ios?'ios':'android')+(inapp?'_inapp':''),path:'/go-step/'})}).catch(function(){});}catch(e){}};
+    body:JSON.stringify({event_name:'page_view',session_id:sid,utm_source:src,utm_campaign:c,utm_content:k+'_'+(ios?'ios':'android')+(inapp?'_inapp':''),path:'/go-step/',interest:(plat+' | '+ua).slice(0,240)})}).catch(function(){});}catch(e){}};
   if(!window.__go.code&&mobile){
     setTimeout(function(){location.replace(ios?apple:window.__go.android);},150);
     // 틱톡·인스타 앱 안 브라우저가 market:// 를 막으면 화면이 그대로 남는다(2026-10-30) → 2초 뒤에도 보이면 기록.
