@@ -113,8 +113,8 @@ a.sub{background:transparent;color:#1b1414;border:1px solid #c9b79d;font-size:14
   <p class="note">연락처에 있는 사람과는 서로 연결되지 않아요.</p>
   <div class="cta">
     <p id="waitMsg">스토어로 가는 중이에요. 안 열리면 눌러 주세요.</p>
-    <a id="aMain" class="main" href="https://play.google.com/store/apps/details?id=com.topnote.app">앱 받기 · 무료</a>
-    <a id="aOther" class="sub" href="https://apps.apple.com/kr/app/id6813747102">다른 폰이에요</a>
+    <a id="aMain" class="main" href="https://apps.apple.com/kr/app/id6813747102">App Store에서 받기</a>
+    <a id="aOther" class="main" href="https://play.google.com/store/apps/details?id=com.topnote.app">Google Play에서 받기</a>
   </div>
   <div class="foot">몬타나 주식회사 · 만 19세 이상</div>
 </div>
@@ -127,6 +127,7 @@ a.sub{background:transparent;color:#1b1414;border:1px solid #c9b79d;font-size:14
     var w=document.getElementById('waitMsg'); if(w) w.hidden=true; return; }
   // 큰 단추 = 이 폰의 스토어, 작은 단추 = 다른 폰 스토어.
   if(g.ios){ a.href=g.apple; b.href=g.play; } else { a.href=g.play; b.href=g.apple; }
+  a.textContent='앱 받기 · 무료'; b.textContent='다른 폰이에요'; b.className='sub';
   // 버튼은 market:// 대신 https 플레이 주소: 앱 안 브라우저가 market:// 를 막아 버튼까지 안 눌리던 문제(2026-10-30). 안드로이드는 이 주소를 플레이 앱으로 연다.
   a.addEventListener('click',function(){g.step&&g.step('tap')}); b.addEventListener('click',function(){g.step&&g.step('tap')});
 })();
