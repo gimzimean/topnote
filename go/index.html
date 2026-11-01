@@ -55,6 +55,8 @@
   //   크롬·삼성 인터넷: intent:// (플레이 앱, 없으면 웹 플레이로)
   var pq='id=com.topnote.app&referrer='+encodeURIComponent(ref);
   var inapp=/musical_ly|BytedanceWebview|trill|TikTok|FBAN|FBAV|Instagram|KAKAOTALK|NAVER|; wv\)/i.test(ua);
+  // 아이폰 페이스북·인스타 앱 안 브라우저는 자동 이동을 막는 일이 많다(2026-11-01 기록: 35% 멈춤) → 큰 앱스토어 버튼 하나만 위로.
+  if(ios&&inapp) document.documentElement.className+=' ios-inapp';
   var market='market://details?'+pq;
   var intent='intent://details?'+pq+'#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url='+encodeURIComponent(play)+';end';
   window.__go.android=android?(inapp?market:intent):play;
@@ -67,7 +69,7 @@
   if(!window.__go.code&&mobile){
     setTimeout(function(){location.replace(ios?apple:window.__go.android);},150);
     // 틱톡·인스타 앱 안 브라우저가 market:// 를 막으면 화면이 그대로 남는다(2026-10-30) → 2초 뒤에도 보이면 기록.
-    setTimeout(function(){ if(document.visibilityState==='visible') window.__go.step('stuck'); },2000);
+    setTimeout(function(){ if(document.visibilityState==='visible'){ window.__go.step('stuck'); var once=false; document.addEventListener('visibilitychange',function(){ if(!once&&document.visibilityState==='hidden'){ once=true; window.__go.step('left'); } }); } },2000);
   }
 })();
 </script>
@@ -91,6 +93,11 @@ a,button{display:block;width:100%;margin:10px 0 0;padding:16px;border-radius:14p
 a.main{background:#1b1414;font-size:18px;padding:18px}
 a.sub{background:transparent;color:#1b1414;border:1px solid #c9b79d;font-size:14px;padding:13px}
 .foot{font-size:10px;color:#a8988e;text-align:center;margin-top:18px}
+html.ios-inapp ol.steps,html.ios-inapp .note,html.ios-inapp .foot{display:none}
+html.ios-inapp .cta{margin-top:26px}
+html.ios-inapp #waitMsg{font-size:15px;color:#1b1414;font-weight:700;margin-bottom:4px}
+html.ios-inapp a.main{font-size:20px;padding:22px;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 #code{max-width:460px;margin:0 auto;background:#F3EBDD;min-height:100vh;padding:80px 24px;text-align:center}
 #code h1{font-family:Georgia,"Apple SD Gothic Neo",serif;font-size:28px;margin:0 0 24px}
 </style>
@@ -128,6 +135,7 @@ a.sub{background:transparent;color:#1b1414;border:1px solid #c9b79d;font-size:14
   // 큰 단추 = 이 폰의 스토어, 작은 단추 = 다른 폰 스토어.
   if(g.ios){ a.href=g.apple; b.href=g.play; } else { a.href=g.play; b.href=g.apple; }
   a.textContent='앱 받기 · 무료'; b.textContent='다른 폰이에요'; b.className='sub';
+  if(/ios-inapp/.test(document.documentElement.className)){ a.textContent='App Store에서 무료로 받기'; var w=document.getElementById('waitMsg'); if(w) w.textContent='아래 버튼을 누르면 앱스토어가 열려요.'; }
   // 버튼은 market:// 대신 https 플레이 주소: 앱 안 브라우저가 market:// 를 막아 버튼까지 안 눌리던 문제(2026-10-30). 안드로이드는 이 주소를 플레이 앱으로 연다.
   a.addEventListener('click',function(){g.step&&g.step('tap')}); b.addEventListener('click',function(){g.step&&g.step('tap')});
 })();
