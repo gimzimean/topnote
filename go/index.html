@@ -39,7 +39,7 @@
   var ua=navigator.userAgent||'';
   // 아이폰 판별: 페이스북 앱 안 브라우저가 기기 정보에 iPhone 을 안 넣어 안드로이드로 보낸 일(2026-11-01) → 기종 값(platform)도 본다.
   var plat=navigator.platform||'';
-  var ios=/iPhone|iPad|iPod/i.test(plat)||/iPhone|iPad|iPod|FBIOS|FBSN/iOS/i.test(ua)||((/Macintosh/.test(ua)||/MacIntel/.test(plat))&&navigator.maxTouchPoints>1);
+  var ios=/iPhone|iPad|iPod/i.test(plat)||/iPhone|iPad|iPod|FBIOS/i.test(ua)||((/Macintosh/.test(ua)||/MacIntel/.test(plat))&&navigator.maxTouchPoints>1);
   // PC(안드로이드·아이폰이 아닌 기기)는 플레이 앱 주소(intent://)를 못 열어 멈췄다 → 웹 플레이 페이지로 바로 보낸다(2026-10-30).
   var android=!ios&&/Android/i.test(ua);
   var ref='utm_source='+src+'&utm_medium='+(talk||invite?'referral':'paid')+'&utm_campaign='+c+(talk?'&talkCode='+talk:'')+(invite?'&invite='+invite:'');
