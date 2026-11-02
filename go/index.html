@@ -35,21 +35,23 @@
   }
   var talk=clean(q.get('talk')||q.get('talkCode'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,12);
   var invite=clean(q.get('invite'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,16);
-  if(talk||invite){ if(!q.get('src')&&!q.get('s')) src='invite'; if(c==='none') c=talk?'talk_invite':'member_invite'; }
+  // 홈 「내 친구 초대」 회원 코드(2026-11-02 친구 보증): 가입하면 누가 초대했는지 남긴다.
+  var friend=clean(q.get('friend'),/[^A-Za-z0-9]/g).toUpperCase().slice(0,12);
+  if(talk||invite||friend){ if(!q.get('src')&&!q.get('s')) src='invite'; if(c==='none') c=talk?'talk_invite':friend?'friend_invite':'member_invite'; }
   var ua=navigator.userAgent||'';
   // 아이폰 판별: 페이스북 앱 안 브라우저가 기기 정보에 iPhone 을 안 넣어 안드로이드로 보낸 일(2026-11-01) → 기종 값(platform)도 본다.
   var plat=navigator.platform||'';
   var ios=/iPhone|iPad|iPod/i.test(plat)||/iPhone|iPad|iPod|FBIOS/i.test(ua)||((/Macintosh/.test(ua)||/MacIntel/.test(plat))&&navigator.maxTouchPoints>1);
   // PC(안드로이드·아이폰이 아닌 기기)는 플레이 앱 주소(intent://)를 못 열어 멈췄다 → 웹 플레이 페이지로 바로 보낸다(2026-10-30).
   var android=!ios&&/Android/i.test(ua);
-  var ref='utm_source='+src+'&utm_medium='+(talk||invite?'referral':'paid')+'&utm_campaign='+c+(talk?'&talkCode='+talk:'')+(invite?'&invite='+invite:'');
+  var ref='utm_source='+src+'&utm_medium='+(talk||invite||friend?'referral':'paid')+'&utm_campaign='+c+(talk?'&talkCode='+talk:'')+(invite?'&invite='+invite:'')+(friend?'&friend='+friend:'');
   var apple='https://apps.apple.com/kr/app/id6813747102?ct='+c;
   var play='https://play.google.com/store/apps/details?id=com.topnote.app&referrer='+encodeURIComponent(ref);
-  window.__go={ios:ios,apple:apple,play:play,code:talk||invite,kind:talk?'talk':(invite?'invite':'')};
+  window.__go={ios:ios,apple:apple,play:play,code:talk||invite||friend,kind:talk?'talk':(invite?'invite':(friend?'friend':''))};
   // 운영실 퍼널: 스토어로 보낸 한 번을 marketing_events 에 남긴다(공개 키 · 넣기만 됨 · 개인정보 없음).
   var sid=(crypto.randomUUID&&crypto.randomUUID())||'00000000-0000-4000-8000-'+String(Date.now()).slice(-12).padStart(12,'0');
   try{fetch('https://rtedhhpfynmrldnaddxl.supabase.co/rest/v1/marketing_events',{method:'POST',keepalive:true,headers:{'apikey':'sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc','Authorization':'Bearer sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc','Content-Type':'application/json','Prefer':'return=minimal'},
-    body:JSON.stringify({event_name:'page_view',session_id:sid,utm_source:src,utm_campaign:c,utm_content:(talk?'go_talk':invite?'go_invite':'go_'+(ios?'ios':'android')),path:'/go/'})}).catch(function(){});}catch(e){}
+    body:JSON.stringify({event_name:'page_view',session_id:sid,utm_source:src,utm_campaign:c,utm_content:(talk?'go_talk':invite?'go_invite':friend?'go_friend':'go_'+(ios?'ios':'android')),path:'/go/'})}).catch(function(){});}catch(e){}
   // 안드로이드는 웹 플레이 페이지가 아니라 플레이 스토어 앱의 설치 화면을 바로 연다(2026-10-30 대표 「바로 설치할 수 있게」).
   //   틱톡 등 인앱 브라우저: market:// (인앱 브라우저가 플레이 앱으로 넘긴다)
   //   크롬·삼성 인터넷: intent:// (플레이 앱, 없으면 웹 플레이로)
@@ -153,8 +155,8 @@ ttq.page();
 <script>
 (function(){var g=window.__go; if(!(g&&g.code))return;
   document.getElementById('wait').hidden=true; document.getElementById('code').hidden=false;
-  if(g.kind==='invite') document.getElementById('ttl').textContent='탑노트 초대장이 왔어요';
-  var text=(g.kind==='talk'?'topnote-talk:':'topnote-invite:')+g.code;
+  if(g.kind==='invite'||g.kind==='friend') document.getElementById('ttl').textContent='탑노트 초대장이 왔어요';
+  var text=(g.kind==='talk'?'topnote-talk:':g.kind==='friend'?'topnote-friend:':'topnote-invite:')+g.code;
   document.getElementById('btn').onclick=function(){
     var go=function(){location.href=g.ios?g.apple:g.android};
     try{navigator.clipboard.writeText(text).then(go,go);}catch(e){go();}
