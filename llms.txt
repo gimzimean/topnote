@@ -14,6 +14,12 @@
 - 통화는 녹음하지 않으며, 언제든 종료·신고·차단 가능.
 - 지역: 한국. 앱: iOS, Android.
 
+## 시즌 안내
+- 크리스마스 전에 소개팅, 언제 시작해요?: https://topnote.app/guide/christmas-dating.html
+- 크리스마스 파티 같이 갈 친구 구하는 법: https://topnote.app/guide/christmas-party-friends.html
+- 소모임에서 이상한 사람 피하는 법: https://topnote.app/guide/meetup-safety.html
+- 빼빼로데이, 줄 사람이 없다면: https://topnote.app/guide/pepero-day.html
+
 ## 링크
 - 홈: https://topnote.app/
 - 보이스 소개팅 안내: https://topnote.app/guide/voice-dating.html
