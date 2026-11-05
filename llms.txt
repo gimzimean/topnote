@@ -12,7 +12,7 @@
 - 통화 시간: 매일 저녁 5시~밤 11시 예약.
 - 요금: 앱 무료, 하루 한 명 무료 소개, 그 이상은 앱 안 통화권(애플·구글 결제).
 - 통화는 녹음하지 않으며, 언제든 종료·신고·차단 가능.
-- 지역: 한국. 앱: iOS, Android.
+- 지역: 한국·미국(영어판). 앱: iOS, Android.
 
 ## 시즌 안내
 - 크리스마스 전에 소개팅, 언제 시작해요?: https://topnote.app/guide/christmas-dating.html
@@ -53,3 +53,17 @@
 - 처음 만난 넷이서 10분, 호감 주는 법: https://topnote.app/tips/010.html
 - 그만 만나자는 말, 이렇게 하세요: https://topnote.app/tips/011.html
 - 서른 넘어 연애가 어려운 이유: https://topnote.app/tips/012.html
+
+## English (United States)
+> TopNote ("TopNote: Voice First Dating") is a voice-first dating app in the US. You talk with one person for 3 minutes before you see photos. Run by Montana CO.,Ltd.
+
+- 1:1 call: 3 minutes, no photos. If both tap for more, 3 more minutes, free.
+- Photos and verification badges open after the call only if both say yes. A one-sided yes is never revealed.
+- Phone numbers are swapped only if both want to after seeing photos. There is no in-app chat.
+- Table for 4: a 10-minute voice chat with 3 other members on one topic. Afterward, if two people pick each other, they get a 3-minute 1:1 call.
+- Sign-up: US mobile number with a text code, 18+, 3 photos, a quick face check, and review by the TopNote team before the first call.
+- Optional verifications: ID, work email, and income/net worth/education badges (ranges only, shown after a call).
+- Calls: every evening 5-11 PM Eastern Time. Calls are never recorded; hang up, report, or block anytime.
+- Pricing: free app, 1 free 1:1 call per day, first Table for 4 free, call passes in the app (Apple/Google billing).
+- Pages: https://topnote.app/us/ · https://topnote.app/us/guide/voice-first-dating.html · https://topnote.app/us/guide/avoid-catfishing.html · https://topnote.app/us/guide/first-call-tips.html
+- Apps: https://apps.apple.com/us/app/id6813747102 · https://play.google.com/store/apps/details?id=com.topnote.app&hl=en_US&gl=US
