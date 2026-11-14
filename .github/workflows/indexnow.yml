@@ -1,0 +1,42 @@
+name: indexnow
+
+# 새 글·고친 글이 main 에 올라오면 IndexNow(빙·네이버·얀덱스 등)에 바로 알린다.
+# 클라우드 루틴 안에서는 indexnow 주소가 막혀 있어서 여기서 보낸다.
+on:
+  push:
+    branches: [main]
+    paths: ['guide/**', 'us/guide/**', 'tips/**', 'index.html', 'faq.html', 'us/index.html', 'llms.txt']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Send changed pages
+        env:
+          KEY: 6502702f40728dcf6ea25b5a0fc8e503
+          HOST: topnote.app
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            files=$(git ls-files 'guide/*.html' 'us/guide/*.html' 'tips/*.html' index.html faq.html us/index.html)
+          else
+            files=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD -- 'guide/*.html' 'us/guide/*.html' 'tips/*.html' index.html faq.html us/index.html)
+          fi
+          [ -z "$files" ] && { echo "보낼 페이지 없음"; exit 0; }
+          urls=$(for f in $files; do
+            p="$f"; [ "$p" = "index.html" ] && p=""; p="${p%/index.html}/"; [ "$p" = "/" ] && p=""
+            case "$f" in */index.html|index.html) ;; *) p="$f";; esac
+            printf '"https://%s/%s",' "$HOST" "$p"; done)
+          body="{\"host\":\"$HOST\",\"key\":\"$KEY\",\"keyLocation\":\"https://$HOST/$KEY.txt\",\"urlList\":[${urls%,}]}"
+          echo "$body"
+          for ep in https://api.indexnow.org/indexnow https://searchadvisor.naver.com/indexnow; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'content-type: application/json; charset=utf-8' --data "$body" "$ep")
+            echo "$ep → $code"
+          done
