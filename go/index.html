@@ -138,7 +138,7 @@ ttq.page();
   <div class="foot">몬타나 주식회사 · 만 19세 이상</div>
 </div>
 <!-- 설명 없이 제목과 단추만(2026-10-30 대표 「초대코드 설명이 너무 길다, 문구는 적지 말고」): 앱이 코드를 저절로 읽어 같은 방에 앉힌다. -->
-<div id="code" hidden><h1 id="ttl">친구가 4인 수다에 불렀어요</h1><button id="btn" type="button">앱 받기</button></div>
+<div id="code" hidden><h1 id="ttl">친구가 4인 수다에 불렀어요</h1><a id="open" hidden style="display:block;margin:0 0 10px;padding:16px;border-radius:14px;background:#B85F45;color:#fff;text-decoration:none;font-weight:700;text-align:center">앱에서 열기 · 바로 같은 방</a><button id="btn" type="button">앱 받기</button></div>
 <script>
 // 저절로 안 넘어가면 누를 단추: 폰에 맞는 스토어를 위로, 안드로이드는 플레이 앱으로(설치 referrer 그대로).
 (function(){var g=window.__go; if(!g)return; var a=document.getElementById('aMain'), b=document.getElementById('aOther');
@@ -156,6 +156,13 @@ ttq.page();
 (function(){var g=window.__go; if(!(g&&g.code))return;
   document.getElementById('wait').hidden=true; document.getElementById('code').hidden=false;
   if(g.kind==='invite'||g.kind==='friend') document.getElementById('ttl').textContent='탑노트 초대장이 왔어요';
+  // 앱이 이미 있으면 앱을 바로 열어 같은 방에 앉힌다(2026-11-16 대표 「들어가자마자 자동 예약」).
+  // 안드로이드는 앱이 없으면 플레이로 넘어가는 intent라 저절로 한 번 시도, 아이폰은 앱이 없으면 오류 창이 떠서 버튼만.
+  if(g.kind==='talk'&&!g.pc){
+    var deep=g.ios?'topnote://talk?talkCode='+g.code:'intent://talk?talkCode='+g.code+'#Intent;scheme=topnote;package=com.topnote.app;S.browser_fallback_url='+encodeURIComponent(g.play)+';end';
+    var o=document.getElementById('open'); o.href=deep; o.hidden=false; o.addEventListener('click',function(){g.step&&g.step('open_app')});
+    if(!g.ios) setTimeout(function(){location.href=deep;},200);
+  }
   var text=(g.kind==='talk'?'topnote-talk:':g.kind==='friend'?'topnote-friend:':'topnote-invite:')+g.code;
   document.getElementById('btn').onclick=function(){
     var go=function(){location.href=g.ios?g.apple:g.android};
