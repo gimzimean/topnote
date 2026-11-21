@@ -7,4 +7,4 @@ Disallow: /_src/
 Disallow: /verify-test.html
 Disallow: /unsubscribe.html
 
-Sitemap: https://topnote.app/sitemap.xml
+Sitemap: https://beet.my/sitemap.xml

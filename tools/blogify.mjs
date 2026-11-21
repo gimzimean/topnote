@@ -6,7 +6,7 @@ import fs from 'fs';
 import path from 'path';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1')), '..');
-const SITE = 'https://topnote.app';
+const SITE = 'https://beet.my';
 const pool = JSON.parse(fs.readFileSync(path.join(ROOT, 'assets/blog/pool.json'), 'utf8'));
 
 const HUB = [
@@ -73,7 +73,7 @@ const attr = (s) => strip(s).replace(/"/g, '&quot;');
 const fmt = (d) => (d ? d.replace(/-/g, '.') : '');
 const thumb = (n, alt, eager) => `<img src="${img(n)}" alt="${attr(alt)}" width="720" height="900" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 
-const HEADER = `<header class="tb"><div class="tb-in"><a class="logo" href="/guide/"><svg class="bm" viewBox="8 2 48 58" aria-hidden="true"><path d="M32 22 L28 6 M32 22 L36 4 M32 22 L42 8" stroke="#5E9B3C" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M32 58 C10 42 8 26 18 20 C25 16 30 20 32 25 C34 20 39 16 46 20 C56 26 54 42 32 58Z" fill="#9B2C4B"/></svg>비트 <span>블로그</span></a><nav><a href="/guide/#phone">전화로 만나기</a><a href="/guide/#season">크리스마스</a><a href="/guide/">전체 글</a><a class="get" href="https://topnote.app/">앱 받기</a></nav></div></header>`;
+const HEADER = `<header class="tb"><div class="tb-in"><a class="logo" href="/guide/"><svg class="bm" viewBox="8 2 48 58" aria-hidden="true"><path d="M32 22 L28 6 M32 22 L36 4 M32 22 L42 8" stroke="#5E9B3C" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M32 58 C10 42 8 26 18 20 C25 16 30 20 32 25 C34 20 39 16 46 20 C56 26 54 42 32 58Z" fill="#9B2C4B"/></svg>비트 <span>블로그</span></a><nav><a href="/guide/#phone">전화로 만나기</a><a href="/guide/#season">크리스마스</a><a href="/guide/">전체 글</a><a class="get" href="https://beet.my/">앱 받기</a></nav></div></header>`;
 const FOOTER = `<footer class="ft"><div class="ft-in"><p class="ft-logo"><svg class="bm" viewBox="8 2 48 58" aria-hidden="true"><path d="M32 22 L28 6 M32 22 L36 4 M32 22 L42 8" stroke="#5E9B3C" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M32 58 C10 42 8 26 18 20 C25 16 30 20 32 25 C34 20 39 16 46 20 C56 26 54 42 32 58Z" fill="#9B2C4B"/></svg>비트</p><p>만나기 전에 검증된 사람과 목소리로 3분 먼저.</p><p class="ft-links"><a href="/">비트 홈</a><a href="/guide/">블로그</a><a href="/faq.html">자주 묻는 질문</a><a href="/community-guidelines.html">안전 수칙</a><a href="/privacy.html">개인정보처리방침</a></p><p class="biz">몬타나 주식회사 (Montana CO.,Ltd) · 대표자 김석 · 사업자등록번호 148-87-01772 · 통신판매업 제2026-부산동래-0486호 · support@zzend.app</p></div></footer>`;
 const HEADLINKS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Noto+Serif+KR:wght@600;700&display=swap"><link rel="stylesheet" href="/assets/blog.css?v=3"><meta name="keywords" content="${KEYWORDS}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#F7F1E8">`;
 const APP = `<div class="app-btns"><a href="https://apps.apple.com/kr/app/id6813747102">App Store</a><a href="https://play.google.com/store/apps/details?id=com.topnote.app">Google Play</a></div>`;

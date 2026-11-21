@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1')), '..');
-const SITE = 'https://topnote.app';
+const SITE = 'https://beet.my';
 const pool = JSON.parse(fs.readFileSync(path.join(ROOT, 'assets/blog/pool.json'), 'utf8')).filter((p) => p.n.startsWith('us-'));
 const OUT = path.join(ROOT, 'us', 'guide'), SRC = path.join(ROOT, '_src', 'us', 'guide');
 
