@@ -174,3 +174,8 @@ ul.checks li::before{content:"";position:absolute;left:2px;top:.62em;width:16px;
   .list-card i{margin-top:6px}
   .ft-in{padding:34px 16px 52px}
 }
+
+/* 영어판(미국) */
+body.en{--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;word-break:normal;letter-spacing:0}
+body.en .post h1,body.en .home-hero h1{letter-spacing:-.02em;font-weight:600}
+body.en .content h2,body.en .faq-h,body.en .sec-h,body.en .cta-h,body.en .side-h{font-weight:600}

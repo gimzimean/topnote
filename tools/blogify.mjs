@@ -58,6 +58,7 @@ function photos(slug, title = '') {
   else if (t === 'prep') hero = [pick(by('prep'), h), pick(M, h)];
   else hero = [pick(W, h), pick(M, h)];
   if (hero[0] === hero[1]) hero[1] = pick(t === 'group' ? by('group') : M, h, 2);
+  if (h % 2) hero.reverse();
   const mid = [pick(W, h, 3), pick(M, h, 3)];
   return { t, hero, mid };
 }
@@ -74,7 +75,7 @@ const thumb = (n, alt, eager) => `<img src="${img(n)}" alt="${attr(alt)}" width=
 
 const HEADER = `<header class="tb"><div class="tb-in"><a class="logo" href="/guide/">T<i>.</i> 탑노트 <span>블로그</span></a><nav><a href="/guide/#phone">전화로 만나기</a><a href="/guide/#season">크리스마스</a><a href="/guide/">전체 글</a><a class="get" href="https://topnote.app/">앱 받기</a></nav></div></header>`;
 const FOOTER = `<footer class="ft"><div class="ft-in"><p class="ft-logo">T<i>.</i> 탑노트</p><p>만나기 전에 검증된 사람과 목소리로 3분 먼저.</p><p class="ft-links"><a href="/">탑노트 홈</a><a href="/guide/">블로그</a><a href="/faq.html">자주 묻는 질문</a><a href="/community-guidelines.html">안전 수칙</a><a href="/privacy.html">개인정보처리방침</a></p><p class="biz">몬타나 주식회사 (Montana CO.,Ltd) · 대표자 김석 · 사업자등록번호 148-87-01772 · 통신판매업 제2026-부산동래-0486호 · support@zzend.app</p></div></footer>`;
-const HEADLINKS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Noto+Serif+KR:wght@600;700&display=swap"><link rel="stylesheet" href="/assets/blog.css?v=2"><meta name="keywords" content="${KEYWORDS}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#F7F1E8">`;
+const HEADLINKS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Noto+Serif+KR:wght@600;700&display=swap"><link rel="stylesheet" href="/assets/blog.css?v=3"><meta name="keywords" content="${KEYWORDS}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#F7F1E8">`;
 const APP = `<div class="app-btns"><a href="https://apps.apple.com/kr/app/id6813747102">App Store</a><a href="https://play.google.com/store/apps/details?id=com.topnote.app">Google Play</a></div>`;
 const CTA = `<aside class="cta-card"><div><p class="kicker">TOP NOTE</p><p class="cta-h">만나기 전에, 3분 먼저.</p><p class="cta-s">검증된 전문직·사업가·대기업 재직자와 사진 말고 목소리로 먼저 이야기해요.</p></div>${APP}</aside>`;
 const tagsHtml = () => `<div class="tags">${TAGS.map(([t, s]) => `<a href="/guide/${s}.html">#${t}</a>`).join('')}</div>`;
