@@ -22,7 +22,7 @@ jobs:
       - name: Send changed pages
         env:
           KEY: 6502702f40728dcf6ea25b5a0fc8e503
-          HOST: topnote.app
+          HOST: beet.my
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             files=$(git ls-files 'guide/*.html' 'us/guide/*.html' 'tips/*.html' index.html faq.html us/index.html)
