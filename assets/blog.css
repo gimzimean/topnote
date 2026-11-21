@@ -1,5 +1,5 @@
 /* 탑노트 블로그 2판 */
-:root{--bg:#F7F2EA;--paper:#FFFDF9;--ink:#1F1B24;--ink2:#3B3541;--mute:#827A87;--line:#E8DFD2;--accent:#B85F45;--wine:#5B2230;--soft:#F1E8DB;--serif:"Noto Serif KR",serif;--sans:"Noto Sans KR","Pretendard","Apple SD Gothic Neo",sans-serif}
+:root{--bg:#F7F2EA;--paper:#FFFDF9;--ink:#1F1B24;--ink2:#3B3541;--mute:#827A87;--line:#E8DFD2;--accent:#9B2C4B;--wine:#5B2230;--soft:#F1E8DB;--serif:"Noto Serif KR",serif;--sans:"Noto Sans KR","Pretendard","Apple SD Gothic Neo",sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.85;letter-spacing:-.01em;word-break:keep-all;overflow-wrap:break-word}
@@ -179,3 +179,22 @@ ul.checks li::before{content:"";position:absolute;left:2px;top:.62em;width:16px;
 body.en{--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;word-break:normal;letter-spacing:0}
 body.en .post h1,body.en .home-hero h1{letter-spacing:-.02em;font-weight:600}
 body.en .content h2,body.en .faq-h,body.en .sec-h,body.en .cta-h,body.en .side-h{font-weight:600}
+
+/* 비트(2026-11-21): 로고 · 「만나는 방법 두 가지」 */
+.bm{width:1em;height:1.2em;vertical-align:-.18em;margin-right:5px}
+.meta .av{background:#F6E3E8}.meta .av .bm{width:18px;height:22px;margin:0}
+.ft-logo .bm{width:18px;height:22px}
+.ways{margin:0 0 64px}
+.ways-lead{margin:-8px 0 18px;color:var(--ink2);font-size:15.5px;line-height:1.8;max-width:720px}
+.ways-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.way{display:flex;gap:0;text-decoration:none;background:var(--paper);border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px var(--line);transition:transform .2s,box-shadow .2s}
+.way:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line),0 16px 28px -18px rgba(60,40,20,.4)}
+.way img{width:42%;flex:none;object-fit:cover;object-position:50% 22%;aspect-ratio:4/5}
+.way-in{padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px}
+.way-no{font-style:normal;font-size:12px;font-weight:900;color:#fff;background:var(--accent);border-radius:7px;padding:1px 8px;align-self:flex-start}
+.way-in b{font-family:var(--serif);font-size:21px;line-height:1.35}
+.way-in em{font-style:normal;font-size:14px;line-height:1.75;color:var(--ink2)}
+.way-names{font-size:12.5px;color:var(--accent);font-weight:700;margin-top:2px}
+.way-go{font-size:13px;font-weight:800;margin-top:auto;padding-top:6px}
+.ways-note{margin:16px 0 0;font-size:14px;color:var(--ink2)}.ways-note a{color:var(--accent);font-weight:800}
+@media (max-width:760px){.ways-grid{grid-template-columns:1fr}.way img{width:38%}}

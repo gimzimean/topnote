@@ -1,4 +1,4 @@
-// 탑노트 블로그 만들기 (2판, 2026-11-21 대표 「더 정리 잘된, 보기 쉬운 블로그」)
+// 비트(옛 탑노트) 블로그 만들기 (2판, 2026-11-21 대표 「더 정리 잘된, 보기 쉬운 블로그」)
 // 새 글은 예전 틀(h1 · p.lead · h2 · FAQ dl · div.cta · div.more)로 guide/<slug>.html 에 쓰고 `node tools/blogify.mjs`.
 // 원본은 _src/guide · _src/tips 에 보관하고, 매번 원본에서 모든 글을 다시 만든다(디자인을 바꾸면 전체에 반영).
 // 사진은 assets/blog/pool.json (모두 사람 나오는 장면). 디자인은 assets/blog.css.
@@ -22,7 +22,7 @@ const TAGS = [
   ['전화단체미팅', 'phone-group-meeting'], ['전화솔로파티', 'phone-solo-party'], ['솔크', 'solkeu-escape'],
   ['솔크탈출', 'solkeu-escape'], ['크리스마스', 'christmas-dating'],
 ];
-const KEYWORDS = '전화 소개팅, 전화 로테이션 소개팅, 전화 미팅, 전화 단체 미팅, 전화 솔로파티, 솔크, 솔크탈출, 크리스마스, 보이스 소개팅, 검증된 소개팅, 전문직 소개팅, 탑노트';
+const KEYWORDS = '비트, 비트 앱, 전화 소개팅, 전화 로테이션 소개팅, 전화 미팅, 2:2 미팅, 전화 단체 미팅, 전화 솔로파티, 솔크, 솔크탈출, 크리스마스, 보이스 소개팅, 검증된 소개팅, 전문직 소개팅';
 const CATS = [
   ['phone', '전화로 만나기'], ['season', '시즌·크리스마스'], ['talk', '첫 통화·대화'], ['safe', '안전·검증'], ['love', '연애 고민'], ['tip', '연애 팁'],
 ];
@@ -73,16 +73,19 @@ const attr = (s) => strip(s).replace(/"/g, '&quot;');
 const fmt = (d) => (d ? d.replace(/-/g, '.') : '');
 const thumb = (n, alt, eager) => `<img src="${img(n)}" alt="${attr(alt)}" width="720" height="900" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 
-const HEADER = `<header class="tb"><div class="tb-in"><a class="logo" href="/guide/">T<i>.</i> 탑노트 <span>블로그</span></a><nav><a href="/guide/#phone">전화로 만나기</a><a href="/guide/#season">크리스마스</a><a href="/guide/">전체 글</a><a class="get" href="https://topnote.app/">앱 받기</a></nav></div></header>`;
-const FOOTER = `<footer class="ft"><div class="ft-in"><p class="ft-logo">T<i>.</i> 탑노트</p><p>만나기 전에 검증된 사람과 목소리로 3분 먼저.</p><p class="ft-links"><a href="/">탑노트 홈</a><a href="/guide/">블로그</a><a href="/faq.html">자주 묻는 질문</a><a href="/community-guidelines.html">안전 수칙</a><a href="/privacy.html">개인정보처리방침</a></p><p class="biz">몬타나 주식회사 (Montana CO.,Ltd) · 대표자 김석 · 사업자등록번호 148-87-01772 · 통신판매업 제2026-부산동래-0486호 · support@zzend.app</p></div></footer>`;
+const HEADER = `<header class="tb"><div class="tb-in"><a class="logo" href="/guide/"><svg class="bm" viewBox="8 2 48 58" aria-hidden="true"><path d="M32 22 L28 6 M32 22 L36 4 M32 22 L42 8" stroke="#5E9B3C" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M32 58 C10 42 8 26 18 20 C25 16 30 20 32 25 C34 20 39 16 46 20 C56 26 54 42 32 58Z" fill="#9B2C4B"/></svg>비트 <span>블로그</span></a><nav><a href="/guide/#phone">전화로 만나기</a><a href="/guide/#season">크리스마스</a><a href="/guide/">전체 글</a><a class="get" href="https://topnote.app/">앱 받기</a></nav></div></header>`;
+const FOOTER = `<footer class="ft"><div class="ft-in"><p class="ft-logo"><svg class="bm" viewBox="8 2 48 58" aria-hidden="true"><path d="M32 22 L28 6 M32 22 L36 4 M32 22 L42 8" stroke="#5E9B3C" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M32 58 C10 42 8 26 18 20 C25 16 30 20 32 25 C34 20 39 16 46 20 C56 26 54 42 32 58Z" fill="#9B2C4B"/></svg>비트</p><p>만나기 전에 검증된 사람과 목소리로 3분 먼저.</p><p class="ft-links"><a href="/">비트 홈</a><a href="/guide/">블로그</a><a href="/faq.html">자주 묻는 질문</a><a href="/community-guidelines.html">안전 수칙</a><a href="/privacy.html">개인정보처리방침</a></p><p class="biz">몬타나 주식회사 (Montana CO.,Ltd) · 대표자 김석 · 사업자등록번호 148-87-01772 · 통신판매업 제2026-부산동래-0486호 · support@zzend.app</p></div></footer>`;
 const HEADLINKS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Noto+Serif+KR:wght@600;700&display=swap"><link rel="stylesheet" href="/assets/blog.css?v=3"><meta name="keywords" content="${KEYWORDS}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#F7F1E8">`;
 const APP = `<div class="app-btns"><a href="https://apps.apple.com/kr/app/id6813747102">App Store</a><a href="https://play.google.com/store/apps/details?id=com.topnote.app">Google Play</a></div>`;
-const CTA = `<aside class="cta-card"><div><p class="kicker">TOP NOTE</p><p class="cta-h">만나기 전에, 3분 먼저.</p><p class="cta-s">검증된 전문직·사업가·대기업 재직자와 사진 말고 목소리로 먼저 이야기해요.</p></div>${APP}</aside>`;
+const CTA = `<aside class="cta-card"><div><p class="kicker">BEET</p><p class="cta-h">만나기 전에, 3분 먼저.</p><p class="cta-s">검증된 전문직·사업가·대기업 재직자와 사진 말고 목소리로 먼저 이야기해요.</p></div>${APP}</aside>`;
 const tagsHtml = () => `<div class="tags">${TAGS.map(([t, s]) => `<a href="/guide/${s}.html">#${t}</a>`).join('')}</div>`;
 
 // ── 원본 읽기
+// 이름 바꿈(2026-11-21 탑노트 → 비트, 4인 수다 → 2:2 미팅): 원본에 옛 이름이 남아 있어도 글은 새 이름으로 만든다.
+const RENAME = [['탑노트 에디터', '비트 에디터'], ['탑노트', '비트'], ['4인 수다는', '2:2 미팅은'], ['4인 수다를', '2:2 미팅을'], ['4인 수다가', '2:2 미팅이'], ['4인 수다와', '2:2 미팅과'], ['4인 수다로', '2:2 미팅으로'], ['4인 수다', '2:2 미팅'], ['처음 만난 검증된 넷이', '처음 만난 검증된 남녀 2:2가'], ['처음 만난 넷이', '처음 만난 남녀 2:2가'], ['2:2 미팅」가', '2:2 미팅」이'], ['2:2 미팅」를', '2:2 미팅」을'], ['2:2 미팅」는', '2:2 미팅」은']];
+const renamed = (t) => RENAME.reduce((x, [a, b]) => x.split(a).join(b), t);
 function readSrc(file, kind) {
-  const html = fs.readFileSync(file, 'utf8');
+  const html = renamed(fs.readFileSync(file, 'utf8'));
   const base = path.basename(file, '.html');
   const slug = kind === 'tip' ? `tip-${base}` : base;
   const main = html.match(/<main>([\s\S]*?)<\/main>/)[1];
@@ -115,7 +118,7 @@ function shapeContent(a, ph) {
   const fig = `<figure class="ph mid"><div class="ph-row">${ph.mid.map((n, k) => thumb(n, `${strip(a.h1)} - ${cap} ${k + 1}`)).join('')}</div><figcaption>${cap}</figcaption></figure>`;
   if (toc.length >= 2) c = c.replace('<h2 id="s2">', `${fig}<h2 id="s2">`); else c += fig;
   if (a.cover) {
-    const card = `<figure class="ph card"><div class="ph-row"><img src="${a.cover}" alt="${attr(a.h1)}" loading="lazy"></div><figcaption>탑노트 카드</figcaption></figure>`;
+    const card = `<figure class="ph card"><div class="ph-row"><img src="${a.cover}" alt="${attr(a.h1)}" loading="lazy"></div><figcaption>비트 카드</figcaption></figure>`;
     c = toc.length >= 3 ? c.replace('<h2 id="s3">', `${card}<h2 id="s3">`) : c + card;
   }
   return { c, toc, faq };
@@ -148,7 +151,7 @@ function article(a) {
 <article class="post">
 <nav class="crumb" aria-label="위치"><a href="/guide/">블로그</a><span>›</span><a href="${listHref}">${catName(cat)}</a></nav>
 <h1>${a.h1}</h1>
-<div class="meta"><span class="av">T.</span><span><b>탑노트 에디터</b><small>${a.d.p ? `<time datetime="${a.d.p}">${fmt(a.d.p)}</time>` : ''}${a.d.m && a.d.m !== a.d.p ? ` · 업데이트 <time datetime="${a.d.m}">${fmt(a.d.m)}</time>` : ''} · ${min}분 읽기</small></span></div>
+<div class="meta"><span class="av"><svg class="bm" viewBox="8 2 48 58" aria-hidden="true"><path d="M32 22 L28 6 M32 22 L36 4 M32 22 L42 8" stroke="#5E9B3C" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M32 58 C10 42 8 26 18 20 C25 16 30 20 32 25 C34 20 39 16 46 20 C56 26 54 42 32 58Z" fill="#9B2C4B"/></svg></span><span><b>비트 에디터</b><small>${a.d.p ? `<time datetime="${a.d.p}">${fmt(a.d.p)}</time>` : ''}${a.d.m && a.d.m !== a.d.p ? ` · 업데이트 <time datetime="${a.d.m}">${fmt(a.d.m)}</time>` : ''} · ${min}분 읽기</small></span></div>
 <figure class="ph hero"><div class="ph-row">${ph.hero.map((n, k) => thumb(n, `${strip(a.h1)} ${k + 1}`, true)).join('')}</div></figure>
 <section class="summary" aria-label="요약"><p class="sum-l">30초 요약</p><p class="sum-t">${lead}</p>${toc.length > 1 ? `<details class="toc-m"><summary>이 글의 순서 ${toc.length + (faq.length ? 1 : 0)}</summary>${tocHtml}</details>` : ''}</section>
 <div class="content">
@@ -159,7 +162,7 @@ ${CTA}
 ${tagsHtml()}
 <section class="rel"><h2 class="sec-h">이어서 읽기</h2><div class="rel-grid">${relHtml}</div></section>
 </article>
-<aside class="side"><div class="side-in">${toc.length > 1 ? `<nav class="toc" aria-label="목차"><p class="side-l">목차</p>${tocHtml}</nav>` : ''}<div class="side-app"><p class="side-l">TOP NOTE</p><p class="side-h">만나기 전에,<br>3분 먼저.</p>${APP}</div></div></aside>
+<aside class="side"><div class="side-in">${toc.length > 1 ? `<nav class="toc" aria-label="목차"><p class="side-l">목차</p>${tocHtml}</nav>` : ''}<div class="side-app"><p class="side-l">BEET</p><p class="side-h">만나기 전에,<br>3분 먼저.</p>${APP}</div></div></aside>
 </div>
 ${FOOTER}</body></html>
 `;
@@ -170,17 +173,22 @@ ${FOOTER}</body></html>
 function indexPage(items) {
   const featured = items.filter((x) => HUB.some(([s]) => s === x.slug));
   const card = (x) => `<a class="list-card" href="${x.href}" data-cat="${x.cat}">${thumb(x.p, x.t)}<span><small>${catName(x.cat)}</small><b>${x.t}</b><em>${x.desc}</em><i>${fmt(x.dp)}</i></span></a>`;
-  const ld = { '@context': 'https://schema.org', '@type': 'Blog', name: '탑노트 블로그', url: `${SITE}/guide/`, inLanguage: 'ko', publisher: { '@type': 'Organization', name: '몬타나 주식회사' }, blogPost: items.map((x) => ({ '@type': 'BlogPosting', headline: x.t, url: SITE + x.href, datePublished: x.dp || undefined, image: ogImg(x.p) })) };
+  const ld = { '@context': 'https://schema.org', '@type': 'Blog', name: '비트 블로그', url: `${SITE}/guide/`, inLanguage: 'ko', publisher: { '@type': 'Organization', name: '몬타나 주식회사' }, blogPost: items.map((x) => ({ '@type': 'BlogPosting', headline: x.t, url: SITE + x.href, datePublished: x.dp || undefined, image: ogImg(x.p) })) };
   const counts = Object.fromEntries(CATS.map(([c]) => [c, items.filter((x) => x.cat === c).length]));
   return `<!doctype html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>탑노트 블로그 · 전화 소개팅·전화 미팅·솔크 탈출 가이드</title><meta name="description" content="전화 소개팅, 전화 로테이션 소개팅, 전화 미팅, 전화 단체 미팅, 전화 솔로파티, 크리스마스 솔크 탈출까지. 검증된 사람과 목소리로 먼저 만나는 탑노트 블로그예요."><link rel="canonical" href="${SITE}/guide/">
-<meta property="og:type" content="website"><meta property="og:url" content="${SITE}/guide/"><meta property="og:title" content="탑노트 블로그"><meta property="og:description" content="전화 소개팅·전화 미팅·전화 솔로파티·솔크 탈출 가이드"><meta property="og:image" content="${ogImg(featured[0]?.p || items[0].p)}"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="탑노트">
+<title>비트 블로그 · 전화 소개팅·2:2 전화 미팅 가이드</title><meta name="description" content="전화 소개팅, 전화 로테이션 소개팅, 전화 미팅, 전화 단체 미팅, 전화 솔로파티, 크리스마스 솔크 탈출까지. 검증된 사람과 목소리로 먼저 만나는 비트 블로그예요."><link rel="canonical" href="${SITE}/guide/">
+<meta property="og:type" content="website"><meta property="og:url" content="${SITE}/guide/"><meta property="og:title" content="비트 블로그"><meta property="og:description" content="전화 소개팅·전화 미팅·전화 솔로파티·솔크 탈출 가이드"><meta property="og:image" content="${ogImg(featured[0]?.p || items[0].p)}"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="비트">
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 ${HEADLINKS}</head><body data-blog="2">${HEADER}
 <main class="home">
-<section class="home-hero"><p class="kicker">TOP NOTE BLOG</p><h1>목소리로 먼저 만나는 법</h1><p>전화 소개팅부터 전화 미팅, 전화 솔로파티, 크리스마스 솔크 탈출까지.<br>검증된 사람과 시간 낭비 없이 만나는 이야기를 모았어요.</p></section>
-<section class="feat" aria-label="전화로 만나는 6가지 방법"><h2 class="sec-h">전화로 만나는 6가지 방법</h2><div class="feat-grid">${HUB.map(([s, t, d]) => { const x = items.find((y) => y.slug === s); return x ? `<a class="feat-card" href="${x.href}">${thumb(x.p, t)}<span><b>${t}</b><small>${d}</small></span></a>` : ''; }).join('')}</div></section>
+<section class="home-hero"><p class="kicker">BEET BLOG</p><h1>목소리로 먼저 만나는 법</h1><p>전화 소개팅부터 전화 미팅, 전화 솔로파티, 크리스마스 솔크 탈출까지.<br>검증된 사람과 시간 낭비 없이 만나는 이야기를 모았어요.</p></section>
+<section class="ways" aria-label="비트에서 만나는 방법"><h2 class="sec-h">비트에서 만나는 방법은 딱 두 가지예요</h2><p class="ways-lead">이름은 여러 가지로 불리지만, 실제로 하는 건 이 두 가지예요. 둘 다 카카오톡 승인으로 정부기관 문서와 대조해 검증된 사람만 들어와요.</p><div class="ways-grid">
+${(() => { const one = items.find((y) => y.slug === 'phone-dating'); const two = items.find((y) => y.slug === 'phone-meeting'); return [
+  [one, '01', '1:1 전화 · 3분', '검증된 한 사람과 사진 없이 목소리로 3분 이야기해요. 둘 다 원하면 사진과 인증이 함께 열리고, 다시 둘 다 원하면 번호를 주고받아요.', [['phone-dating', '전화 소개팅'], ['phone-rotation-dating', '전화 로테이션 소개팅'], ['voice-dating', '보이스 소개팅']]],
+  [two, '02', '2:2 미팅 · 10분', '처음 만난 남녀 2:2가 목소리로 10분 이야기해요. 매일 저녁 5시부터 밤 11시까지 매시 정각에 방이 열리고, 끝나면 마음에 든 사람을 몰래 골라요. 서로 고르면 바로 사진이 열려요.', [['phone-meeting', '전화 미팅'], ['phone-group-meeting', '전화 단체 미팅'], ['phone-solo-party', '전화 솔로파티']]],
+].filter(([x]) => x).map(([x, no, t, d, names]) => `<a class="way" href="${x.href}">${thumb(x.p, t)}<span class="way-in"><i class="way-no">${no}</i><b>${t}</b><em>${d}</em><span class="way-names">이렇게도 불러요 · ${names.map(([, n]) => n).join(' · ')}</span><span class="way-go">자세히 보기 →</span></span></a>`).join(''); })()}
+</div><p class="ways-note">크리스마스 전에 새 사람을 만나고 싶다면 <a href="/guide/solkeu-escape.html">솔크 탈출 가이드</a>부터 읽어 보세요.</p></section>
 <section class="all" aria-label="모든 글"><div class="tabs" role="tablist"><button class="on" data-f="all">전체 <i>${items.length}</i></button>${CATS.filter(([c]) => counts[c]).map(([c, n]) => `<button data-f="${c}" id="${c}">${n} <i>${counts[c]}</i></button>`).join('')}</div>
 <div class="list-grid">${items.map(card).join('')}</div></section>
 ${CTA}

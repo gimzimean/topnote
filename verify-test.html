@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>본인인증 시험 — 탑노트</title>
+    <title>본인인증 시험 — 비트</title>
     <style>
       body { margin: 0; font-family: "Noto Sans KR", system-ui, sans-serif; background: #f5eee3; color: #28231e; }
       main { max-width: 520px; margin: 0 auto; padding: 40px 20px; display: flex; flex-direction: column; gap: 14px; }
@@ -18,7 +18,7 @@
   <body>
     <main>
       <h1>본인인증 시험 (PortOne 테스트 채널)</h1>
-      <p>운영 확인용 페이지예요. 실제 회원 화면이 아니에요. 같은 브라우저 창에서 탑노트 앱에 로그인한 계정으로 서버 확인까지 진행해요.</p>
+      <p>운영 확인용 페이지예요. 실제 회원 화면이 아니에요. 같은 브라우저 창에서 비트 앱에 로그인한 계정으로 서버 확인까지 진행해요.</p>
       <p id="who">로그인 계정 확인 중…</p>
       <button id="start" type="button">KG이니시스 통합인증 시작</button>
       <pre id="out" hidden></pre>
@@ -44,7 +44,7 @@
 
       async function confirmOnServer(identityVerificationId) {
         const current = session();
-        if (!current) { show('이 창에서 탑노트 앱(…/topnote/app/)에 먼저 로그인해 주세요.', true); return; }
+        if (!current) { show('이 창에서 비트 앱(…/topnote/app/)에 먼저 로그인해 주세요.', true); return; }
         show(`인증 번호 ${identityVerificationId}\n서버에서 확인 중…`);
         const response = await fetch(`${config.supabaseUrl}/functions/v1/identity-verify`, {
           method: 'POST',
