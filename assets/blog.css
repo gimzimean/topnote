@@ -1,0 +1,128 @@
+/* 탑노트 블로그 */
+:root{--bg:#F7F1E8;--paper:#FFFDF9;--ink:#1F1B24;--ink2:#3A3440;--mute:#7A7380;--line:#E6DCCD;--accent:#B85F45;--wine:#5B2230;--soft:#F0E6D8;--serif:"Noto Serif KR","DM Serif Display",serif;--sans:"Noto Sans KR","Pretendard","Apple SD Gothic Neo",sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.9;letter-spacing:-.01em;word-break:keep-all;overflow-wrap:break-word}
+a{color:inherit}
+img{max-width:100%;height:auto;display:block}
+
+/* 상단 */
+.tb{position:sticky;top:0;z-index:10;background:rgba(247,241,232,.88);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid rgba(31,27,36,.06)}
+.tb-in{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-family:var(--serif);font-weight:700;font-size:21px;text-decoration:none;white-space:nowrap}
+.logo i,.ft-logo i{color:var(--accent);font-style:normal}
+.logo span{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--mute);margin-left:4px}
+.tb nav{display:flex;align-items:center;gap:18px;font-size:14.5px}
+.tb nav a{text-decoration:none;color:var(--ink2)}
+.tb nav a.get{background:var(--ink);color:#fff;padding:8px 15px;border-radius:999px;font-weight:700}
+
+/* 글 */
+.post{max-width:720px;margin:0 auto;padding:56px 24px 40px}
+.crumb{font-size:13px;color:var(--mute);display:flex;gap:8px;margin-bottom:34px}
+.crumb a{text-decoration:none}
+.cat{display:inline-block;margin:0 0 18px;font-size:12.5px;font-weight:700;letter-spacing:.08em;color:var(--accent);text-transform:uppercase}
+.post h1{font-family:var(--serif);font-weight:700;font-size:clamp(28px,5.4vw,40px);line-height:1.38;letter-spacing:-.025em;margin:0 0 26px}
+.meta{display:flex;align-items:center;gap:12px;padding-bottom:34px;margin-bottom:40px;border-bottom:1px solid var(--line)}
+.meta .av{width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--serif);font-weight:700;display:grid;place-items:center;font-size:15px;flex:none}
+.meta b{display:block;font-size:14.5px;line-height:1.4}
+.meta small{display:block;font-size:13px;color:var(--mute);line-height:1.4}
+
+/* 사진 */
+.ph{margin:56px 0}
+.ph.hero{margin:0 -64px 52px}
+.ph-row{display:flex;gap:10px}
+.ph-row img{flex:1;min-width:0;aspect-ratio:4/5;object-fit:cover;border-radius:18px;background:var(--soft)}
+.ph.one .ph-row{max-width:440px;margin:0 auto}
+.ph.card .ph-row{max-width:520px;margin:0 auto}
+.ph.card .ph-row img{aspect-ratio:auto}
+.ph figcaption{text-align:center;font-size:13.5px;color:var(--mute);margin-top:14px}
+
+/* 한 줄 답 · 목차 */
+.answer{background:var(--paper);border-radius:20px;padding:26px 28px;margin:0 0 36px;box-shadow:0 1px 0 var(--line),0 12px 30px -18px rgba(60,40,20,.25);border-left:4px solid var(--accent)}
+.answer-l,.toc-l,.kicker{margin:0 0 8px;font-size:12.5px;font-weight:800;letter-spacing:.08em;color:var(--accent)}
+.answer p:last-child{margin:0;font-size:18px;line-height:1.85;color:var(--ink)}
+.toc{border:1px solid var(--line);border-radius:20px;padding:24px 28px;margin:0 0 20px}
+.toc ol{margin:0;padding-left:20px}
+.toc li{font-size:15.5px;line-height:1.7;margin:6px 0;color:var(--ink2)}
+.toc a{text-decoration:none}
+.toc a:hover{color:var(--accent)}
+
+/* 본문 */
+.content h2{font-family:var(--serif);font-weight:700;font-size:clamp(22px,4vw,27px);line-height:1.45;letter-spacing:-.02em;margin:76px 0 22px;scroll-margin-top:84px}
+.content h2 .no{display:block;font-family:var(--sans);font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.06em;margin-bottom:6px}
+.content p,.content li{font-size:17.5px;line-height:1.95;color:var(--ink2)}
+.content p{margin:0 0 24px}
+.content b,.answer b{color:var(--ink);background:linear-gradient(transparent 62%,rgba(184,95,69,.18) 0)}
+.content ul,.content ol{padding-left:22px;margin:0 0 28px}
+.content li{margin:10px 0}
+.content table{width:100%;border-collapse:separate;border-spacing:0;margin:8px 0 32px;background:var(--paper);border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.content th,.content td{padding:14px 16px;text-align:left;font-size:15px;line-height:1.6;border-bottom:1px solid var(--line);vertical-align:top}
+.content th{background:var(--soft);font-weight:700}
+.content tr:last-child td{border-bottom:0}
+.content .box{background:var(--paper);border-radius:16px;padding:6px 20px}
+.faq{margin:0}
+.faq dt{font-weight:800;font-size:17px;margin:14px 0 0;padding:22px 24px 4px;background:var(--paper);border-radius:18px 18px 0 0}
+.faq dt::before{content:"Q. ";color:var(--accent)}
+.faq dd{margin:0 0 6px;padding:4px 24px 22px;background:var(--paper);border-radius:0 0 18px 18px;font-size:16.5px;line-height:1.85;color:var(--ink2)}
+
+/* 태그 */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:56px 0 0}
+.tags a{text-decoration:none;font-size:14px;color:var(--wine);background:var(--soft);padding:7px 13px;border-radius:999px}
+.tags a:hover{background:#E8D9C6}
+
+/* 앱 카드 */
+.cta-card{margin:56px 0;background:var(--ink);color:#fff;border-radius:26px;padding:40px 32px;text-align:center}
+.cta-card .kicker{color:#D9A38F}
+.cta-h{font-family:var(--serif);font-size:clamp(25px,4.6vw,32px);font-weight:700;margin:0 0 12px;line-height:1.4}
+.cta-s{margin:0 0 26px;color:#CFC6D4;font-size:15.5px;line-height:1.8}
+.cta-btn{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cta-btn a{background:#fff;color:var(--ink);text-decoration:none;font-weight:800;padding:13px 22px;border-radius:14px;font-size:15px}
+
+/* 전화로 만나는 방법 · 관련 글 */
+.hub{margin:72px 0 0}
+.hub-h,.rel-h{font-family:var(--serif);font-size:24px;margin:0 0 22px;line-height:1.4}
+.rel-h small{font-family:var(--sans);font-size:14px;color:var(--mute);margin-left:6px}
+.hub-grid,.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.hub-card,.rel-card,.list-card{text-decoration:none;display:block;background:var(--paper);border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px var(--line);transition:transform .2s,box-shadow .2s}
+.hub-card:hover,.rel-card:hover,.list-card:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line),0 16px 30px -18px rgba(60,40,20,.35)}
+.hub-card img,.rel-card img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 25%}
+.hub-card span{display:block;padding:12px 14px 14px}
+.hub-card b{display:block;font-size:15px;line-height:1.4}
+.hub-card small{display:block;font-size:12.5px;color:var(--mute);line-height:1.5;margin-top:2px}
+.rel{margin:72px 0 0}
+.rel-card span{display:block;padding:12px 14px 16px;font-size:14.5px;font-weight:700;line-height:1.5}
+
+/* 블로그 목록 */
+.list-lead{font-size:18px;color:var(--ink2);margin:0 0 8px}
+.list .tags{margin-top:28px}
+.list-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:20px}
+.list-card{display:flex;gap:18px;align-items:stretch}
+.list-card img{width:132px;flex:none;aspect-ratio:1;object-fit:cover;object-position:50% 25%}
+.list-card span{padding:16px 18px 16px 0;display:flex;flex-direction:column;gap:4px}
+.list-card b{font-size:16.5px;line-height:1.5}
+.list-card small{font-size:13.5px;color:var(--mute);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.list-card em{font-style:normal;font-size:12.5px;color:var(--mute)}
+
+/* 아래 */
+.ft{border-top:1px solid var(--line);margin-top:40px}
+.ft-in{max-width:720px;margin:0 auto;padding:44px 24px 64px;font-size:13px;color:var(--mute);line-height:1.8}
+.ft-logo{font-family:var(--serif);font-weight:700;font-size:20px;color:var(--ink);margin:0 0 4px}
+.ft a{color:var(--ink2);text-decoration:none}
+.ft .biz{margin-top:18px}
+
+@media (max-width:860px){.ph.hero{margin:0 0 44px}}
+@media (max-width:620px){
+  .tb-in{padding:12px 16px}.tb nav{gap:12px;font-size:13.5px}.tb nav a:not(.get){display:none}
+  .post{padding:36px 16px 28px}
+  .crumb{margin-bottom:24px}
+  .ph{margin:44px 0}.ph-row{gap:6px}.ph-row img{border-radius:14px}
+  .answer{padding:22px 20px}.toc{padding:20px 20px}
+  .answer p:last-child{font-size:17px}
+  .content p,.content li{font-size:16.5px}
+  .content h2{margin-top:60px}
+  .content th,.content td{padding:11px 10px;font-size:14px}
+  .hub-grid,.rel-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .cta-card{padding:34px 20px;border-radius:22px}
+  .list-card img{width:104px}
+  .ft-in{padding:36px 16px 56px}
+}
