@@ -3,6 +3,7 @@ Allow: /
 Disallow: /app/
 Disallow: /admin/
 Disallow: /go/
+Disallow: /_src/
 Disallow: /verify-test.html
 Disallow: /unsubscribe.html
 
