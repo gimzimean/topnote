@@ -2,9 +2,9 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>탑노트 · 만나기 전에, 3분 먼저</title>
+<title>비트 · 만나기 전에, 3분 먼저</title>
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="탑노트 TOP NOTE">
+<meta property="og:site_name" content="비트 TOP NOTE">
 <meta property="og:title" content="비트 · 목소리로 3분 먼저, 서로 원하면 사진">
 <meta property="og:description" content="전화 로테이션 소개팅 · 전화 솔로파티 · 2:2 전화 미팅">
 <meta property="og:image" content="https://beet.my/assets/og-3min.jpg">
@@ -14,7 +14,7 @@
 <script>
 // 광고·초대 링크 하나로 폰에 맞는 스토어로 보낸다 (2026-10-29).
 //   ?c=캠페인(기본 none) ?src·?s=소스(기본 direct — 2026-10-30: 주소만 복사해 온 사람이 틱톡으로 잡히던 것 수정)
-//   ?talk=4인 수다 친구 코드 · ?invite=멤버 초대 코드 → 안드로이드는 플레이 referrer 에 실어 보낸다
+//   ?talk=2:2 미팅 친구 코드 · ?invite=멤버 초대 코드 → 안드로이드는 플레이 referrer 에 실어 보낸다
 //   (앱이 첫 실행 때 설치 referrer 를 읽는다). 아이폰은 referrer 가 없어 코드를 복사한 뒤 앱스토어로 간다.
 (function(){
   var q=new URLSearchParams(location.search), clean=function(v,re){return (v||'').replace(re,'')};
@@ -117,7 +117,7 @@ ttq.page();
 <!-- 자동 이동이 막힐 때만 남는 작은 랜딩(2026-10-30 대표 「③ 합치기 + 설명 조금」). 이미지 없이 글만이라 느려지지 않는다. -->
 <!-- 자동 이동이 막힐 때·PC에서만 보이는 랜딩(2026-10-30 대표 「너무 구려, 랜딩페이지처럼」). 이미지 없이 글만이라 느려지지 않는다. -->
 <div id="wait" class="page">
-  <div class="top"><b>T<i>.</i></b><span>TOP NOTE · 탑노트</span></div>
+  <div class="top"><b>T<i>.</i></b><span>TOP NOTE · 비트</span></div>
   <div class="hero">
     <div class="eyebrow">BEFORE YOU MEET</div>
     <h1 class="hl">만나기 전에,<br>3분 먼저.</h1>
@@ -127,7 +127,7 @@ ttq.page();
     <li><span>01</span>인증한 사람과 3분 통화</li>
     <li><span>02</span>둘 다 원하면 사진과 인증 공개</li>
     <li><span>03</span>둘 다 원하면 번호 교환</li>
-    <li><span>+</span>1:1이 떨리면 넷이 하는 4인 수다</li>
+    <li><span>+</span>1:1이 떨리면 넷이 하는 2:2 미팅</li>
   </ol>
   <p class="note">연락처에 있는 사람과는 서로 연결되지 않아요.</p>
   <div class="cta">
@@ -138,7 +138,7 @@ ttq.page();
   <div class="foot">몬타나 주식회사 · 만 19세 이상</div>
 </div>
 <!-- 설명 없이 제목과 단추만(2026-10-30 대표 「초대코드 설명이 너무 길다, 문구는 적지 말고」): 앱이 코드를 저절로 읽어 같은 방에 앉힌다. -->
-<div id="code" hidden><h1 id="ttl">친구가 4인 수다에 불렀어요</h1><a id="open" hidden style="display:block;margin:0 0 10px;padding:16px;border-radius:14px;background:#B85F45;color:#fff;text-decoration:none;font-weight:700;text-align:center">앱에서 열기 · 바로 같은 방</a><button id="btn" type="button">앱 받기</button></div>
+<div id="code" hidden><h1 id="ttl">친구가 2:2 미팅에 불렀어요</h1><a id="open" hidden style="display:block;margin:0 0 10px;padding:16px;border-radius:14px;background:#B85F45;color:#fff;text-decoration:none;font-weight:700;text-align:center">앱에서 열기 · 바로 같은 방</a><button id="btn" type="button">앱 받기</button></div>
 <script>
 // 저절로 안 넘어가면 누를 단추: 폰에 맞는 스토어를 위로, 안드로이드는 플레이 앱으로(설치 referrer 그대로).
 (function(){var g=window.__go; if(!g)return; var a=document.getElementById('aMain'), b=document.getElementById('aOther');
@@ -155,7 +155,7 @@ ttq.page();
 <script>
 (function(){var g=window.__go; if(!(g&&g.code))return;
   document.getElementById('wait').hidden=true; document.getElementById('code').hidden=false;
-  if(g.kind==='invite'||g.kind==='friend') document.getElementById('ttl').textContent='탑노트 초대장이 왔어요';
+  if(g.kind==='invite'||g.kind==='friend') document.getElementById('ttl').textContent='비트 초대장이 왔어요';
   // 앱이 이미 있으면 앱을 바로 열어 같은 방에 앉힌다(2026-11-16 대표 「들어가자마자 자동 예약」).
   // 안드로이드는 앱이 없으면 플레이로 넘어가는 intent라 저절로 한 번 시도, 아이폰은 앱이 없으면 오류 창이 떠서 버튼만.
   if(g.kind==='talk'&&!g.pc){
