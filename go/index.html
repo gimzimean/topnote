@@ -58,7 +58,9 @@
   var pq='id=com.topnote.app&referrer='+encodeURIComponent(ref);
   var inapp=/musical_ly|BytedanceWebview|trill|TikTok|FBAN|FBAV|Instagram|KAKAOTALK|NAVER|; wv\)/i.test(ua);
   // 아이폰 페이스북·인스타 앱 안 브라우저는 자동 이동을 막는 일이 많다(2026-11-01 기록: 35% 멈춤) → 큰 앱스토어 버튼 하나만 위로.
-  if(ios&&inapp) document.documentElement.className+=' ios-inapp';
+  // 프로필 링크(land=1)는 소개 페이지를 먼저 보여주고 버튼으로 스토어(2026-11-22 대표). 광고 링크는 지금처럼 바로 이동.
+  var land=q.get('land')==='1';
+  if(ios&&inapp&&!land) document.documentElement.className+=' ios-inapp';
   var market='market://details?'+pq;
   var intent='intent://details?'+pq+'#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url='+encodeURIComponent(play)+';end';
   window.__go.android=android?(inapp?market:intent):play;
@@ -68,7 +70,7 @@
   // 단계 기록(운영실 진단용): 자동 이동 뒤에도 이 화면에 남아 있으면 stuck, 버튼을 누르면 tap (path /go-step/).
   window.__go.step=function(k){try{fetch('https://rtedhhpfynmrldnaddxl.supabase.co/rest/v1/marketing_events',{method:'POST',keepalive:true,headers:{'apikey':'sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc','Authorization':'Bearer sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc','Content-Type':'application/json','Prefer':'return=minimal'},
     body:JSON.stringify({event_name:'page_view',session_id:sid,utm_source:src,utm_campaign:c,utm_content:k+'_'+(ios?'ios':'android')+(inapp?'_inapp':''),path:'/go-step/',interest:(plat+' | '+ua).slice(0,240)})}).catch(function(){});}catch(e){}};
-  if(!window.__go.code&&mobile){
+  if(!window.__go.code&&mobile&&!land){
     setTimeout(function(){location.replace(ios?apple:window.__go.android);},150);
     // 틱톡·인스타 앱 안 브라우저가 market:// 를 막으면 화면이 그대로 남는다(2026-10-30) → 2초 뒤에도 보이면 기록.
     setTimeout(function(){ if(document.visibilityState==='visible'){ window.__go.step('stuck'); var once=false; document.addEventListener('visibilitychange',function(){ if(!once&&document.visibilityState==='hidden'){ once=true; window.__go.step('left'); } }); } },2000);
