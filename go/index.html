@@ -80,14 +80,15 @@
 body{margin:0;background:#1b1414;color:#1b1414;font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
 .page{max-width:460px;min-height:100vh;margin:0 auto;background:#F3EBDD;padding:22px 24px 28px;display:flex;flex-direction:column}
 .top{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:3px;color:#9a7b5b}
-.top b{font-family:Georgia,serif;font-size:20px;letter-spacing:0;color:#1b1414}.top b i,.logo i{color:#B85F45;font-style:normal}
+.brand{display:flex;align-items:center;gap:8px;font-family:Georgia,"Apple SD Gothic Neo",serif;font-size:22px;font-weight:700;letter-spacing:0;color:#1b1414}.brand img{width:40px;height:40px;border-radius:10px}
+.top b{font-family:Georgia,serif;font-size:20px;letter-spacing:0;color:#1b1414}.top b i,.logo i{color:#9B2C4A;font-style:normal}
 .hero{padding:34px 0 22px;border-bottom:1px solid #d9cbb6}
 .eyebrow{font-size:11px;letter-spacing:3px;color:#9a7b5b;margin-bottom:12px}
 .hl{font-family:Georgia,"Apple SD Gothic Neo",serif;font-size:40px;font-weight:700;line-height:1.18;letter-spacing:-.5px;margin:0}
 .lead{font-size:16px;color:#5a4a44;line-height:1.6;margin:14px 0 0}
 ol.steps{list-style:none;padding:0;margin:0}
 ol.steps li{display:flex;gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid #d9cbb6;font-size:15px;line-height:1.45}
-ol.steps li span{font-family:Georgia,serif;font-size:13px;color:#B85F45;min-width:22px}
+ol.steps li span{font-family:Georgia,serif;font-size:13px;color:#9B2C4A;min-width:22px}
 .note{font-size:13px;color:#7a6a60;margin:14px 0 18px;line-height:1.5}
 .cta{margin-top:auto}
 #waitMsg{font-size:12px;color:#8a7a72;text-align:center;margin:0 0 10px}
@@ -113,11 +114,13 @@ ttq.load('DBK1HOJC77U38B7LSATG');
 ttq.page();
 }(window, document, 'ttq');
 </script>
+<link rel="icon" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 </head><body>
 <!-- 자동 이동이 막힐 때만 남는 작은 랜딩(2026-10-30 대표 「③ 합치기 + 설명 조금」). 이미지 없이 글만이라 느려지지 않는다. -->
 <!-- 자동 이동이 막힐 때·PC에서만 보이는 랜딩(2026-10-30 대표 「너무 구려, 랜딩페이지처럼」). 이미지 없이 글만이라 느려지지 않는다. -->
 <div id="wait" class="page">
-  <div class="top"><span>BEET · 비트</span></div>
+  <div class="top"><span class="brand"><img src="/assets/beet-logo.png" alt="" width="40" height="40">비트</span><span>BEET</span></div>
   <div class="hero">
     <div class="eyebrow">BEFORE YOU MEET</div>
     <h1 class="hl">검증된 사람과<br>3분 통화 소개팅부터.</h1>
@@ -138,7 +141,7 @@ ttq.page();
   <div class="foot">몬타나 주식회사 · 만 19세 이상</div>
 </div>
 <!-- 설명 없이 제목과 단추만(2026-10-30 대표 「초대코드 설명이 너무 길다, 문구는 적지 말고」): 앱이 코드를 저절로 읽어 같은 방에 앉힌다. -->
-<div id="code" hidden><h1 id="ttl">친구가 2:2 미팅에 불렀어요</h1><a id="open" hidden style="display:block;margin:0 0 10px;padding:16px;border-radius:14px;background:#B85F45;color:#fff;text-decoration:none;font-weight:700;text-align:center">앱에서 열기 · 바로 같은 방</a><button id="btn" type="button">앱 받기</button></div>
+<div id="code" hidden><h1 id="ttl">친구가 2:2 미팅에 불렀어요</h1><a id="open" hidden style="display:block;margin:0 0 10px;padding:16px;border-radius:14px;background:#9B2C4A;color:#fff;text-decoration:none;font-weight:700;text-align:center">앱에서 열기 · 바로 같은 방</a><button id="btn" type="button">앱 받기</button></div>
 <script>
 // 저절로 안 넘어가면 누를 단추: 폰에 맞는 스토어를 위로, 안드로이드는 플레이 앱으로(설치 referrer 그대로).
 (function(){var g=window.__go; if(!g)return; var a=document.getElementById('aMain'), b=document.getElementById('aOther');
