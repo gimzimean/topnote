@@ -74,10 +74,10 @@ const fmt = (d) => (d ? d.replace(/-/g, '.') : '');
 const thumb = (n, alt, eager) => `<img src="${img(n)}" alt="${attr(alt)}" width="720" height="900" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 
 const HEADER = `<header class="tb"><div class="tb-in"><a class="logo" href="/guide/"><svg class="bm" viewBox="8 2 48 58" aria-hidden="true"><path d="M32 22 L28 6 M32 22 L36 4 M32 22 L42 8" stroke="#5E9B3C" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M32 58 C10 42 8 26 18 20 C25 16 30 20 32 25 C34 20 39 16 46 20 C56 26 54 42 32 58Z" fill="#9B2C4B"/></svg>비트 <span>블로그</span></a><nav><a href="/guide/#phone">전화로 만나기</a><a href="/guide/#season">크리스마스</a><a href="/guide/">전체 글</a><a class="get" href="https://beet.my/">앱 받기</a></nav></div></header>`;
-const FOOTER = `<footer class="ft"><div class="ft-in"><p class="ft-logo"><svg class="bm" viewBox="8 2 48 58" aria-hidden="true"><path d="M32 22 L28 6 M32 22 L36 4 M32 22 L42 8" stroke="#5E9B3C" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M32 58 C10 42 8 26 18 20 C25 16 30 20 32 25 C34 20 39 16 46 20 C56 26 54 42 32 58Z" fill="#9B2C4B"/></svg>비트</p><p>만나기 전에 검증된 사람과 목소리로 3분 먼저.</p><p class="ft-links"><a href="/">비트 홈</a><a href="/guide/">블로그</a><a href="/faq.html">자주 묻는 질문</a><a href="/community-guidelines.html">안전 수칙</a><a href="/privacy.html">개인정보처리방침</a></p><p class="biz">몬타나 주식회사 (Montana CO.,Ltd) · 대표자 김석 · 사업자등록번호 148-87-01772 · 통신판매업 제2026-부산동래-0486호 · support@zzend.app</p></div></footer>`;
+const FOOTER = `<footer class="ft"><div class="ft-in"><p class="ft-logo"><svg class="bm" viewBox="8 2 48 58" aria-hidden="true"><path d="M32 22 L28 6 M32 22 L36 4 M32 22 L42 8" stroke="#5E9B3C" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M32 58 C10 42 8 26 18 20 C25 16 30 20 32 25 C34 20 39 16 46 20 C56 26 54 42 32 58Z" fill="#9B2C4B"/></svg>비트</p><p>검증된 사람과 3분 통화 소개팅부터.</p><p class="ft-links"><a href="/">비트 홈</a><a href="/guide/">블로그</a><a href="/faq.html">자주 묻는 질문</a><a href="/community-guidelines.html">안전 수칙</a><a href="/privacy.html">개인정보처리방침</a></p><p class="biz">몬타나 주식회사 (Montana CO.,Ltd) · 대표자 김석 · 사업자등록번호 148-87-01772 · 통신판매업 제2026-부산동래-0486호 · support@zzend.app</p></div></footer>`;
 const HEADLINKS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Noto+Serif+KR:wght@600;700&display=swap"><link rel="stylesheet" href="/assets/blog.css?v=3"><meta name="keywords" content="${KEYWORDS}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#F7F1E8">`;
 const APP = `<div class="app-btns"><a href="https://apps.apple.com/kr/app/id6813747102">App Store</a><a href="https://play.google.com/store/apps/details?id=com.topnote.app">Google Play</a></div>`;
-const CTA = `<aside class="cta-card"><div><p class="kicker">BEET</p><p class="cta-h">만나기 전에, 3분 먼저.</p><p class="cta-s">검증된 전문직·사업가·대기업 재직자와 사진 말고 목소리로 먼저 이야기해요.</p></div>${APP}</aside>`;
+const CTA = `<aside class="cta-card"><div><p class="kicker">BEET</p><p class="cta-h">검증된 사람과 3분 통화 소개팅부터.</p><p class="cta-s">검증된 전문직·사업가·대기업 재직자와 사진 말고 목소리로 먼저 이야기해요.</p></div>${APP}</aside>`;
 const tagsHtml = () => `<div class="tags">${TAGS.map(([t, s]) => `<a href="/guide/${s}.html">#${t}</a>`).join('')}</div>`;
 
 // ── 원본 읽기
@@ -162,7 +162,7 @@ ${CTA}
 ${tagsHtml()}
 <section class="rel"><h2 class="sec-h">이어서 읽기</h2><div class="rel-grid">${relHtml}</div></section>
 </article>
-<aside class="side"><div class="side-in">${toc.length > 1 ? `<nav class="toc" aria-label="목차"><p class="side-l">목차</p>${tocHtml}</nav>` : ''}<div class="side-app"><p class="side-l">BEET</p><p class="side-h">만나기 전에,<br>3분 먼저.</p>${APP}</div></div></aside>
+<aside class="side"><div class="side-in">${toc.length > 1 ? `<nav class="toc" aria-label="목차"><p class="side-l">목차</p>${tocHtml}</nav>` : ''}<div class="side-app"><p class="side-l">BEET</p><p class="side-h">검증된 사람과<br>3분 통화 소개팅부터.</p>${APP}</div></div></aside>
 </div>
 ${FOOTER}</body></html>
 `;
