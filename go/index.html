@@ -187,4 +187,4 @@ ttq.page();
   };
 })();
 </script>
-</body></html>
+<script>/* 내 초대 링크가 열리면 서버에 알림 → 다른 곳에서 열렸으면 초대한 회원에게 통화권 1장(2026-11-22) */(function(){try{var f=(new URLSearchParams(location.search).get('friend')||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(f.length!==7)return;var k='beet_fo_'+f;try{if(localStorage.getItem(k))return;localStorage.setItem(k,'1');}catch(e){}fetch('https://rtedhhpfynmrldnaddxl.supabase.co/rest/v1/rpc/open_friend_link',{method:'POST',keepalive:true,headers:{'apikey':'sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc','Authorization':'Bearer sb_publishable_bh8B8BvCaWUo_ikNX4eQIQ_R-1AgXQc','Content-Type':'application/json'},body:JSON.stringify({p_code:f})}).catch(function(){});}catch(e){}})();</script></body></html>
