@@ -75,34 +75,43 @@
   }
 })();
 </script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&display=swap" rel="stylesheet">
 <style>
+/* 앱 홈 톤(2026-11-22 대표 B+C 합치기 · D 칩): 크림 바탕 · 비트 로고 · 작은 와인 글자 + 큰 명조 · 위아래 진한 선 · 와인 둥근 버튼 */
+:root{--cream:#F7F1EA;--ink:#1F1418;--muted:#7A6A6F;--wine:#7A1838;--beet:#9B2C4B;--pink:#F6E3E8;--line:#D8CDBE}
 *{box-sizing:border-box}
-body{margin:0;background:#1b1414;color:#1b1414;font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
-.page{max-width:460px;min-height:100vh;margin:0 auto;background:#F3EBDD;padding:22px 24px 28px;display:flex;flex-direction:column}
-.top{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:3px;color:#9a7b5b}
-.brand{display:flex;align-items:center;gap:8px;font-family:Georgia,"Apple SD Gothic Neo",serif;font-size:22px;font-weight:700;letter-spacing:0;color:#1b1414}.brand img{width:40px;height:40px;border-radius:10px}
-.top b{font-family:Georgia,serif;font-size:20px;letter-spacing:0;color:#1b1414}.top b i,.logo i{color:#9B2C4A;font-style:normal}
-.hero{padding:34px 0 22px;border-bottom:1px solid #d9cbb6}
-.eyebrow{font-size:11px;letter-spacing:3px;color:#9a7b5b;margin-bottom:12px}
-.hl{font-family:Georgia,"Apple SD Gothic Neo",serif;font-size:40px;font-weight:700;line-height:1.18;letter-spacing:-.5px;margin:0}
-.lead{font-size:16px;color:#5a4a44;line-height:1.6;margin:14px 0 0}
-ol.steps{list-style:none;padding:0;margin:0}
-ol.steps li{display:flex;gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid #d9cbb6;font-size:15px;line-height:1.45}
-ol.steps li span{font-family:Georgia,serif;font-size:13px;color:#9B2C4A;min-width:22px}
-.note{font-size:13px;color:#7a6a60;margin:14px 0 18px;line-height:1.5}
+body{margin:0;background:#1F1418;color:var(--ink);font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
+.serif{font-family:"Noto Serif KR",Georgia,serif;font-weight:700}
+.page{max-width:460px;min-height:100vh;margin:0 auto;background:var(--cream);padding:20px 22px 24px;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:8px}.top img{width:32px;height:32px;border-radius:8px}.top b{font-size:20px}
+.top span{margin-left:auto;font-size:10px;letter-spacing:3px;color:var(--muted)}
+.hero{display:flex;gap:14px;align-items:center;margin-top:22px}.hero .ov{flex:1;min-width:0}
+.key{color:var(--wine);font-size:11px;font-weight:800;letter-spacing:3px}
+.hl{font-size:26px;line-height:1.32;letter-spacing:-.8px;margin:8px 0 0}
+.chips{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:16px}
+.chips span{background:var(--pink);color:var(--wine);font-size:12.5px;font-weight:800;padding:6px 11px;border-radius:999px;white-space:nowrap}
+.chips span:first-child{background:var(--beet);color:#fff}
+.pic{width:42%;max-width:180px;aspect-ratio:406/578;flex:none;background:url(/assets/go-couple.jpg) center/cover no-repeat}
+.steps{border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);margin-top:22px}
+.step{display:flex;gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}
+.step .n{color:var(--wine);font-size:11px;font-weight:800;letter-spacing:2px;width:22px}
+.step .w{font-size:27px;letter-spacing:-.5px;width:64px}.step .d{color:var(--muted);font-size:14px}
+.note{font-size:12.5px;color:var(--muted);margin:12px 0 18px;line-height:1.5}
 .cta{margin-top:auto}
-#waitMsg{font-size:12px;color:#8a7a72;text-align:center;margin:0 0 10px}
-a,button{display:block;width:100%;margin:10px 0 0;padding:16px;border-radius:14px;border:0;background:#1b1414;color:#fff;font-size:16px;font-weight:700;text-decoration:none;text-align:center;cursor:pointer}
-a.main{background:#1b1414;font-size:18px;padding:18px}
-a.sub{background:transparent;color:#1b1414;border:1px solid #c9b79d;font-size:14px;padding:13px}
-.foot{font-size:10px;color:#a8988e;text-align:center;margin-top:18px}
-html.ios-inapp ol.steps,html.ios-inapp .note,html.ios-inapp .foot{display:none}
+#waitMsg{font-size:12px;color:var(--muted);text-align:center;margin:0 0 6px}
+a,button{display:block;width:100%;margin:10px 0 0;padding:15px;border-radius:28px;border:0;background:var(--wine);color:var(--cream);font-size:16px;font-weight:800;text-decoration:none;text-align:center;cursor:pointer}
+a.main{background:var(--wine);color:var(--cream)}
+a.main+a.main,a.sub{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+a.sub{font-size:14px;padding:12px}
+.foot{font-size:10px;color:#a8988e;text-align:center;margin-top:16px}
+html.ios-inapp .steps,html.ios-inapp .note,html.ios-inapp .foot{display:none}
 html.ios-inapp .cta{margin-top:26px}
-html.ios-inapp #waitMsg{font-size:15px;color:#1b1414;font-weight:700;margin-bottom:4px}
-html.ios-inapp a.main{font-size:20px;padding:22px;animation:pulse 1.6s ease-in-out infinite}
+html.ios-inapp #waitMsg{font-size:15px;color:var(--ink);font-weight:700;margin-bottom:4px}
+html.ios-inapp a.main{font-size:19px;padding:20px;animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
-#code{max-width:460px;margin:0 auto;background:#F3EBDD;min-height:100vh;padding:80px 24px;text-align:center}
-#code h1{font-family:Georgia,"Apple SD Gothic Neo",serif;font-size:28px;margin:0 0 24px}
+#code{max-width:460px;margin:0 auto;background:var(--cream);min-height:100vh;padding:80px 24px;text-align:center}
+#code h1{font-family:"Noto Serif KR",Georgia,serif;font-size:28px;margin:0 0 24px}
 </style>
 <!-- TikTok Pixel(beet.my, 2026-11-02): 광고에서 이 페이지에 들어온 방문만 잰다 -->
 <script>
@@ -120,18 +129,20 @@ ttq.page();
 <!-- 자동 이동이 막힐 때만 남는 작은 랜딩(2026-10-30 대표 「③ 합치기 + 설명 조금」). 이미지 없이 글만이라 느려지지 않는다. -->
 <!-- 자동 이동이 막힐 때·PC에서만 보이는 랜딩(2026-10-30 대표 「너무 구려, 랜딩페이지처럼」). 이미지 없이 글만이라 느려지지 않는다. -->
 <div id="wait" class="page">
-  <div class="top"><span class="brand"><img src="/assets/beet-logo.png" alt="" width="40" height="40">비트</span><span>BEET</span></div>
+  <div class="top"><img src="/assets/beet-logo.png" alt="" width="32" height="32"><b class="serif">비트</b><span>BEET</span></div>
   <div class="hero">
-    <div class="eyebrow">BEFORE YOU MEET</div>
-    <h1 class="hl">검증된 사람과<br>3분 통화 소개팅부터.</h1>
-    <p class="lead">사진 말고 목소리로 먼저 만나요.<br>안 맞으면 잃는 건 3분뿐이에요.</p>
+    <div class="ov">
+      <div class="key">BEFORE YOU MEET</div>
+      <h1 class="hl serif">검증된 사람과<br>3분 통화<br>소개팅부터.</h1>
+      <div class="chips"><span>전화 로테이션 소개팅</span><span>전화 솔로파티</span><span>전화 미팅 2:2</span></div>
+    </div>
+    <div class="pic" role="img" aria-label="통화하는 남녀"></div>
   </div>
-  <ol class="steps">
-    <li><span>01</span>인증한 사람과 3분 통화</li>
-    <li><span>02</span>둘 다 원하면 사진과 인증 공개</li>
-    <li><span>03</span>둘 다 원하면 번호 교환</li>
-    <li><span>+</span>1:1이 떨리면 넷이 하는 2:2 미팅</li>
-  </ol>
+  <div class="steps">
+    <div class="step"><span class="n">01</span><span class="w serif">통화</span><span class="d">사진 없이 3분</span></div>
+    <div class="step"><span class="n">02</span><span class="w serif">사진</span><span class="d">둘 다 원하면 공개</span></div>
+    <div class="step"><span class="n">03</span><span class="w serif">번호</span><span class="d">둘 다 원하면 교환</span></div>
+  </div>
   <p class="note">연락처에 있는 사람과는 서로 연결되지 않아요.</p>
   <div class="cta">
     <p id="waitMsg">스토어로 가는 중이에요. 안 열리면 눌러 주세요.</p>
