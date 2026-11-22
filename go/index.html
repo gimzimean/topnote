@@ -45,7 +45,8 @@
   // PC(안드로이드·아이폰이 아닌 기기)는 플레이 앱 주소(intent://)를 못 열어 멈췄다 → 웹 플레이 페이지로 바로 보낸다(2026-10-30).
   var android=!ios&&/Android/i.test(ua);
   var ref='utm_source='+src+'&utm_medium='+(talk||invite||friend?'referral':'paid')+'&utm_campaign='+c+(talk?'&talkCode='+talk:'')+(invite?'&invite='+invite:'')+(friend?'&friend='+friend:'');
-  var apple='https://apps.apple.com/kr/app/id6813747102?ct='+c;
+  // 애플 캠페인 추적(2026-11-22): pt(회사 토큰)+ct(출처.캠페인, 40자)를 붙이면 앱스토어 커넥트 분석 「캠페인」에 광고별 아이폰 설치가 잡힌다.
+  var apple='https://apps.apple.com/kr/app/id6813747102?pt=129480827&ct='+encodeURIComponent((src+'.'+c).slice(0,40))+'&mt=8';
   var play='https://play.google.com/store/apps/details?id=com.topnote.app&referrer='+encodeURIComponent(ref);
   window.__go={ios:ios,apple:apple,play:play,code:talk||invite||friend,kind:talk?'talk':(invite?'invite':(friend?'friend':''))};
   // 운영실 퍼널: 스토어로 보낸 한 번을 marketing_events 에 남긴다(공개 키 · 넣기만 됨 · 개인정보 없음).
