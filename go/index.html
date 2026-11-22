@@ -99,7 +99,7 @@ body{margin:0;background:#1F1418;color:var(--ink);font-family:-apple-system,"App
 .step .n{color:var(--wine);font-size:11px;font-weight:800;letter-spacing:2px;width:22px}
 .step .w{font-size:27px;letter-spacing:-.5px;width:64px}.step .d{color:var(--muted);font-size:14px}
 .note{font-size:12.5px;color:var(--muted);margin:16px 0 28px;line-height:1.5}
-.cta{margin-top:auto}
+.cta{margin-top:8px}
 #waitMsg{font-size:12px;color:var(--muted);text-align:center;margin:0 0 6px}
 a,button{display:block;width:100%;margin:10px 0 0;padding:15px;border-radius:28px;border:0;background:var(--wine);color:var(--cream);font-size:16px;font-weight:800;text-decoration:none;text-align:center;cursor:pointer}
 a.main{background:var(--wine);color:var(--cream)}
@@ -161,7 +161,9 @@ ttq.page();
     var w=document.getElementById('waitMsg'); if(w) w.hidden=true; return; }
   // 큰 단추 = 이 폰의 스토어, 작은 단추 = 다른 폰 스토어.
   if(g.ios){ a.href=g.apple; b.href=g.play; } else { a.href=g.play; b.href=g.apple; }
-  a.textContent='앱 받기 · 무료'; b.textContent='다른 폰이에요'; b.className='sub';
+  // 폰도 PC와 똑같은 두 버튼(2026-11-22 대표 「이 그대로」): 이 폰의 스토어가 위.
+  a.textContent=g.ios?'App Store에서 받기':'Google Play에서 받기'; b.textContent=g.ios?'Google Play에서 받기':'App Store에서 받기'; b.className='main';
+  if(new URLSearchParams(location.search).get('land')==='1'){ var wm=document.getElementById('waitMsg'); if(wm) wm.hidden=true; }
   if(/ios-inapp/.test(document.documentElement.className)){ a.textContent='App Store에서 무료로 받기'; var w=document.getElementById('waitMsg'); if(w) w.textContent='아래 버튼을 누르면 앱스토어가 열려요.'; }
   // 버튼은 market:// 대신 https 플레이 주소: 앱 안 브라우저가 market:// 를 막아 버튼까지 안 눌리던 문제(2026-10-30). 안드로이드는 이 주소를 플레이 앱으로 연다.
   a.addEventListener('click',function(){g.step&&g.step('tap')}); b.addEventListener('click',function(){g.step&&g.step('tap')});
