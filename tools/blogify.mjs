@@ -183,7 +183,7 @@ function indexPage(items) {
 ${HEADLINKS}</head><body data-blog="2">${HEADER}
 <main class="home">
 <section class="home-hero"><p class="kicker">BEET BLOG</p><h1>목소리로 먼저 만나는 법</h1><p>전화 소개팅부터 전화 미팅, 전화 솔로파티, 크리스마스 솔크 탈출까지.<br>검증된 사람과 시간 낭비 없이 만나는 이야기를 모았어요.</p></section>
-<section class="ways" aria-label="비트에서 만나는 방법"><h2 class="sec-h">비트에서 만나는 방법은 딱 두 가지예요</h2><p class="ways-lead">이름은 여러 가지로 불리지만, 실제로 하는 건 이 두 가지예요. 둘 다 카카오톡 승인으로 정부기관 문서와 대조해 검증된 사람만 들어와요.</p><div class="ways-grid">
+<section class="ways" aria-label="비트에서 만나는 방법"><h2 class="sec-h">비트에서 만나는 방법은 딱 두 가지예요</h2><p class="ways-lead">이름은 여러 가지로 불리지만, 실제로 하는 건 이 두 가지예요. 둘 다 카카오톡 승인으로 전자서명으로 검증해 검증된 사람만 들어와요.</p><div class="ways-grid">
 ${(() => { const one = items.find((y) => y.slug === 'phone-dating'); const two = items.find((y) => y.slug === 'phone-meeting'); return [
   [one, '01', '1:1 전화 · 3분', '검증된 한 사람과 사진 없이 목소리로 3분 이야기해요. 둘 다 원하면 사진과 인증이 함께 열리고, 다시 둘 다 원하면 번호를 주고받아요.', [['phone-dating', '전화 소개팅'], ['phone-rotation-dating', '전화 로테이션 소개팅'], ['voice-dating', '보이스 소개팅']]],
   [two, '02', '2:2 미팅 · 10분', '처음 만난 남녀 2:2가 목소리로 10분 이야기해요. 매일 저녁 5시부터 밤 11시까지 매시 정각에 방이 열리고, 끝나면 마음에 든 사람을 몰래 골라요. 서로 고르면 바로 사진이 열려요.', [['phone-meeting', '전화 미팅'], ['phone-group-meeting', '전화 단체 미팅'], ['phone-solo-party', '전화 솔로파티']]],
