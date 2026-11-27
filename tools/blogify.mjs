@@ -218,3 +218,16 @@ for (const [dir, kind, test] of [['guide', 'guide', (f) => f.endsWith('.html') &
 items.sort((x, y) => (y.dp || '').localeCompare(x.dp || '') || x.slug.localeCompare(y.slug));
 fs.writeFileSync(path.join(ROOT, 'guide', 'index.html'), indexPage(items));
 console.log(`글 ${items.length}개 다시 만듦 · 블로그 목록 갱신`);
+
+// 사이트 아이콘(2026-11-27 대표 「구글에 지구본」): 목록·글 어디든 아이콘 줄이 없으면 넣는다.
+{
+  const ICON = '<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">';
+  for (const dir of ['guide', 'tips', 'blog']) {
+    const full = path.join(ROOT, dir);
+    if (!fs.existsSync(full)) continue;
+    for (const f of fs.readdirSync(full).filter((x) => x.endsWith('.html'))) {
+      const p = path.join(full, f); const s = fs.readFileSync(p, 'utf8');
+      if (!s.includes('rel="icon"') && s.includes('</head>')) fs.writeFileSync(p, s.replace('</head>', ICON + '</head>'));
+    }
+  }
+}
